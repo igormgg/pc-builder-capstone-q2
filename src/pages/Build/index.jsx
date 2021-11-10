@@ -1,22 +1,7 @@
 import { Button } from "../../components/Button";
 import { Container, Header, Main, Footer } from "./style";
-import { useHistory } from "react-router";
 
 const Build = () => {
-  const cpu = {
-    model: "AMD Ryzen 5 3600",
-    cores: "6",
-    threads: "12",
-    socket: "AM4",
-    baseClock: "3.6",
-    coolerBox: true,
-    graphics: false,
-    price: 1678.31,
-    img: "https://static.meupc.net/produto/processador-amd-ryzen-5-3600-100100000031box-jXdm89-L.jpg",
-  };
-
-  const history = useHistory();
-
   return (
     <Container>
       <Header>
@@ -104,7 +89,10 @@ const Build = () => {
 
         <div className="card filled">
           <div className="header">
-            <img src={cpu.img} alt="" />
+            <img
+              src="https://static.meupc.net/produto/processador-amd-ryzen-5-3600-100100000031box-jXdm89-L.jpg"
+              alt=""
+            />
           </div>
           <div className="body">
             <h3 id="category">Processador</h3>
