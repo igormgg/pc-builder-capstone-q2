@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { Container } from "./style";
 import api from "../../services/api.js"
+import { AiOutlinePlusCircle } from "react-icons/ai"
 
 const CategoryProducts = () => {
+  const history = useHistory()
+
   const { category } = useParams();
 
   const [products, setProducts] = useState({})
@@ -21,7 +24,8 @@ const CategoryProducts = () => {
   const filter = products[category] ? products[category].filter(
     (element) =>
       element.model.toLowerCase().includes(searchInput.toLowerCase()) ||
-      element.price.toString().includes(searchInput)
+      element.price.toString().includes(searchInput) ||
+      Number(searchInput) <= element.price
   ) : []
 
   return (
@@ -41,10 +45,12 @@ const CategoryProducts = () => {
               <img src={element.img} alt={element.model} />
             </div>
             <div id="contentDiv" >
-              <h3>{element.model}</h3>
-              <p>Exibir detalhes</p>
-              <h3>Preço: {element.price}</h3>
-              <button >Adicionar</button>
+              <div id="info" >
+                <h3>{element.model}</h3>
+                <p>Exibir detalhes <AiOutlinePlusCircle id="plusIcon" /></p>
+                <h3>Preço: {element.price}</h3>
+              </div>
+              <button onClick={() => history.push("/build")} >Adicionar</button>
             </div>
           </div>
         ))) :
@@ -54,9 +60,11 @@ const CategoryProducts = () => {
                 <img src={element.img} alt={element.model} />
               </div>
               <div id="contentDiv" >
-                <h3>{element.model}</h3>
-                <p>Exibir detalhes</p>
-                <h3>Preço: {element.price}</h3>
+                <div id="info" >
+                  <h3>{element.model}</h3>
+                  <p>Exibir detalhes</p>
+                  <h3>Preço: {element.price}</h3>
+                </div>
                 <button >Adicionar</button>
               </div>
             </div>

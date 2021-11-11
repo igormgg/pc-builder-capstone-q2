@@ -4,12 +4,13 @@ export const Container = styled.div`
 
 #banner {
 min-width: 288px;
-max-width: 1240px;
+max-width: 1500px;
 height: 60px;
 background-color: var(--secondary-color);
 display: grid;
 place-items: center;
 margin: 20px auto;
+margin-top: 0;
 color: var(--gray4);
 }
 
@@ -17,6 +18,7 @@ color: var(--gray4);
     margin: 0 auto;
     display: grid;
     place-items: center;
+
     input {
         border: 2px solid transparent;
         width: 230px;
@@ -46,7 +48,7 @@ color: var(--gray4);
         background-origin: border-box;
         background-clip: content-box, border-box;
         width: 235px;
-        height: 340px;
+        height: 400px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -56,7 +58,8 @@ color: var(--gray4);
         #imageDiv {
             background-color: white;
             width: 95%;
-            margin: 5px 5px 10px 5px;
+            max-width: 200px;
+            margin: 5px 5px 5px 5px;
             display: grid;
             place-items: center;
 
@@ -71,15 +74,35 @@ color: var(--gray4);
             display: flex;
             flex-direction:column;
             align-items: center;
-            justify-content: space-around;
+            justify-content: space-evenly;
             text-align: center;
 
-            p {
-                cursor: pointer;
-                font-size: 18px;
-                line-height: 16px;
-                color: var(--gray2);
+            #info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+
+                h3:first-child {
+                    width: 95%;
+                }
+    
+                p {
+                    cursor: pointer;
+                    font-size: 18px;
+                    line-height: 16px;
+                    color: var(--gray2);
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+    
+                    #plusIcon {
+                        font-size: 20px;
+                        color: var(--gray1);
+                    }
+                }
             }
+
 
             button {
                 width: 150px;
@@ -107,6 +130,53 @@ color: var(--gray4);
         height: 250px;
         display: grid;
         place-items: center;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    #searchInput {
+        display: block;
+    }
+
+    #products {
+
+        #card {
+            height: 160px;
+            max-width: 1114px;
+            width: 100%;
+            flex-direction: row;
+    
+            #imageDiv {
+                
+    
+                img {
+                    
+                }
+            }
+    
+            #contentDiv {
+                flex-direction: row;
+                width: 70%;
+                justify-content: space-between;
+    
+                #info {
+                    width: 300px;
+                    align-items: flex-start;
+                    margin-left: 30px;
+                    
+                    h3:first-child {
+                        text-align: left;
+                    }
+        
+                    p {
+                        
+                        #plusIcon {
+                            
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
