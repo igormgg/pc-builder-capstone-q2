@@ -1,5 +1,5 @@
-const Providers = ({ children }) => {
-  return <>{children}</>;
-};
+import { AuthProvider } from "./auth";
+
+const Providers = ({ children }) => <AuthProvider>{children}</AuthProvider>;
 
 export default Providers;
