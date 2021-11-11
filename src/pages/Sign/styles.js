@@ -27,19 +27,30 @@ const SignContainer = styled.div`
       color: var(--gray1);
     }
 
-    input {
+    .inputWrap {
       max-width: 500px;
       width: 100%;
-      height: 40px;
-      color: var(--gray4);
-      background-color: var(--gray1);
-      font-size: 18px;
-      padding: 0 15px;
-      border: 2px solid transparent;
-      border-radius: 8px;
+      height: 80px;
 
-      :focus {
-        border: 2px solid var(--primary-color);
+      input {
+        /* max-width: 500px; */
+        width: 100%;
+        height: 40px;
+        color: var(--gray4);
+        background-color: var(--gray1);
+        font-size: 18px;
+        padding: 0 15px;
+        border: 2px solid transparent;
+        border-radius: 8px;
+
+        :focus {
+          border: 2px solid var(--primary-color);
+        }
+      }
+
+      label {
+        font-size: 12px;
+        color: var(--primary-color);
       }
     }
 
@@ -101,9 +112,11 @@ const SignContainer = styled.div`
       gap: unset;
       justify-content: space-evenly;
 
-      input {
-        height: 60px;
-        font-size: 24px;
+      .inputWrap {
+        input {
+          height: 60px;
+          font-size: 24px;
+        }
       }
 
       button {
@@ -119,7 +132,7 @@ const SignContainer = styled.div`
 
     #registerForm {
       /* height: 735px; */
-      height: calc(300px + 40vh);
+      height: calc(350px + 37vh);
       border-top: none;
       border-left: 2px solid var(--gray2);
       padding: 10px 0 20px 16px;
