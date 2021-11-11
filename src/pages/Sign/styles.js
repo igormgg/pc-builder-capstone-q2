@@ -14,7 +14,6 @@ const SignContainer = styled.div`
   }
 
   form {
-    /* max-width: 500px; */
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -33,7 +32,6 @@ const SignContainer = styled.div`
       height: 80px;
 
       input {
-        /* max-width: 500px; */
         width: 100%;
         height: 40px;
         color: var(--gray4);
@@ -125,19 +123,15 @@ const SignContainer = styled.div`
     }
 
     #loginForm {
-      /* height: 500px; */
       height: calc(200px + 26vh);
       padding: 10px 16px 0 0;
     }
 
     #registerForm {
-      /* height: 735px; */
       height: calc(350px + 37vh);
       border-top: none;
       border-left: 2px solid var(--gray2);
       padding: 10px 0 20px 16px;
-      /* padding-left: 16px;
-      padding-bottom: 20px; */
     }
   }
 `;
