@@ -14,7 +14,7 @@ const Build = () => {
           <h3 id="total">Valor total: R$ 1.750,00</h3>
           <h3 id="psu">Consumo estimado: 65W</h3>
         </div>
-        {/* <div className="validation_status">
+        <div className="validation_status">
           <div className="content">
             <h3>
               Inicie sua montagem para verificarmos a compatibilidade entre seus
@@ -27,7 +27,7 @@ const Build = () => {
             <IoIosWarning></IoIosWarning>
             <h3>Compatibilidade verificada com sucesso</h3>
           </div>
-        </div> */}
+        </div>
         <div className="validation_status">
           <div className="content success">
             <BsCheckCircleFill></BsCheckCircleFill>
