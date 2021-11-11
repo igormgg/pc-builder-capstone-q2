@@ -10,10 +10,12 @@ const Sign = () => {
     return <Redirect to="/" />;
   }
   return (
-    <SignContainer>
-      <LoginContainer />
-      <RegisterContainer />
-    </SignContainer>
+    <>
+      <SignContainer>
+        <LoginContainer />
+        <RegisterContainer />
+      </SignContainer>
+    </>
   );
 };
 
