@@ -1,4 +1,4 @@
-import { StyledButton } from "./style";
+import { StyledButton } from "./styles";
 
 export const Button = ({ children, variant, size, ...rest }) => {
   return (
