@@ -1,14 +1,25 @@
 import styled from "styled-components";
 
 const SignContainer = styled.div`
-  min-height: calc(100vh - 60px);
+  min-height: 100vh;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  #header {
+    width: 100%;
+    height: 60px;
+    background-color: var(--gray2);
+  }
 
   form {
+    /* max-width: 500px; */
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 3vh;
 
     h1 {
       font-size: 24px;
@@ -22,7 +33,7 @@ const SignContainer = styled.div`
       height: 40px;
       color: var(--gray4);
       background-color: var(--gray1);
-      font-size: 16px;
+      font-size: 18px;
       padding: 0 15px;
       border: 2px solid transparent;
       border-radius: 8px;
@@ -42,7 +53,7 @@ const SignContainer = styled.div`
   }
 
   #loginForm {
-    padding: 10px 0 20px 0;
+    padding: 10px 0 4vh 0;
 
     button {
       color: var(--gray1);
@@ -60,7 +71,7 @@ const SignContainer = styled.div`
   }
 
   #registerForm {
-    padding-top: 10px;
+    padding-top: 3vh;
     border-top: 2px solid var(--gray2);
 
     button {
@@ -83,14 +94,37 @@ const SignContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: unset;
 
-    /* form {
-      align-items: unset;
-    } */
+    form {
+      margin-top: 70px;
+      gap: unset;
+      justify-content: space-evenly;
+
+      input {
+        height: 60px;
+        font-size: 24px;
+      }
+
+      button {
+        height: 60px;
+      }
+    }
+
+    #loginForm {
+      /* height: 500px; */
+      height: calc(200px + 26vh);
+      padding: 10px 16px 0 0;
+    }
 
     #registerForm {
+      /* height: 735px; */
+      height: calc(300px + 40vh);
       border-top: none;
       border-left: 2px solid var(--gray2);
+      padding: 10px 0 20px 16px;
+      /* padding-left: 16px;
+      padding-bottom: 20px; */
     }
   }
 `;
