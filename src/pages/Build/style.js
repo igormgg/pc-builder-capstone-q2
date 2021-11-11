@@ -41,6 +41,8 @@ export const Header = styled.div`
     min-height: 100px;
     display: grid;
     place-items: center;
+    max-width: 600px;
+    margin: 0 auto;
 
     .content {
       display: flex;

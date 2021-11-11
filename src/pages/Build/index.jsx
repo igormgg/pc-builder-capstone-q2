@@ -2,8 +2,31 @@ import { Button } from "../../components/Button";
 import { Container, Header, Main, Footer } from "./style";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { IoIosWarning } from "react-icons/io";
+import { useEffect, useState } from "react";
+import api from "../../services/api";
+import { useHistory } from "react-router";
 
 const Build = () => {
+  const history = useHistory();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    api.get("/products/").then((res) => setProducts(res.data));
+  }, []);
+
+  console.log(products);
+
+  const categorySchema = {
+    cpu: "Processador",
+    gpu: "Placa de Vídeo",
+    motherboard: "Placa Mãe",
+    ram: "Memória Ram",
+    drive: "Armazenamento",
+    case: "Gabinete",
+    font: "Fonte",
+    peripherals: "Periféricos",
+  };
+
   return (
     <Container>
       <Header>
@@ -14,7 +37,7 @@ const Build = () => {
           <h3 id="total">Valor total: R$ 1.750,00</h3>
           <h3 id="psu">Consumo estimado: 65W</h3>
         </div>
-        <div className="validation_status">
+        {/* <div className="validation_status">
           <div className="content">
             <h3>
               Inicie sua montagem para verificarmos a compatibilidade entre seus
@@ -25,9 +48,9 @@ const Build = () => {
         <div className="validation_status">
           <div className="content fail">
             <IoIosWarning></IoIosWarning>
-            <h3>Compatibilidade verificada com sucesso</h3>
+            <h3>Incompatibilidade detectada</h3>
           </div>
-        </div>
+        </div> */}
         <div className="validation_status">
           <div className="content success">
             <BsCheckCircleFill></BsCheckCircleFill>
@@ -36,78 +59,25 @@ const Build = () => {
         </div>
       </Header>
       <Main>
-        <div className="card">
-          <div className="content">
-            <h3>Gabinete</h3>
-          </div>
-          <div className="footer">
-            <Button size="sm">Adicionar</Button>
-          </div>
-        </div>
-        <div className="card">
-          <div className="content">
-            <h3>Processador</h3>
-          </div>
-          <div className="footer">
-            <Button size="sm">Adicionar</Button>
-          </div>
-        </div>
-        <div className="card">
-          <div className="content">
-            <h3>Cooler</h3>
-          </div>
-          <div className="footer">
-            <Button size="sm">Adicionar</Button>
-          </div>
-        </div>
-        <div className="card">
-          <div className="content">
-            <h3>Place de Vídeo</h3>
-          </div>
-          <div className="footer">
-            <Button size="sm">Adicionar</Button>
-          </div>
-        </div>
-        <div className="card">
-          <div className="content">
-            <h3>Placa Mãe</h3>
-          </div>
-          <div className="footer">
-            <Button size="sm">Adicionar</Button>
-          </div>
-        </div>
-        <div className="card">
-          <div className="content">
-            <h3>Memória Ram</h3>
-          </div>
-          <div className="footer">
-            <Button size="sm">Adicionar</Button>
-          </div>
-        </div>
-        <div className="card">
-          <div className="content">
-            <h3>Armazenamento</h3>
-          </div>
-          <div className="footer">
-            <Button size="sm">Adicionar</Button>
-          </div>
-        </div>
-        <div className="card">
-          <div className="content">
-            <h3>Fonte</h3>
-          </div>
-          <div className="footer">
-            <Button size="sm">Adicionar</Button>
-          </div>
-        </div>
-        <div className="card">
-          <div className="content">
-            <h3>Periféricos</h3>
-          </div>
-          <div className="footer">
-            <Button size="sm">Adicionar</Button>
-          </div>
-        </div>
+        {Object.entries(categorySchema).map((item, index) => {
+          return (
+            <div className="card" key={index}>
+              <div className="content">
+                <h3>{item[1]}</h3>
+              </div>
+              <div className="footer">
+                <Button
+                  size="sm"
+                  onClick={() => history.push(`/build/${item[0]}`)}
+                >
+                  Adicionar
+                </Button>
+              </div>
+            </div>
+          );
+        })}
+
+        {/*
 
         <div className="card filled">
           <div className="header">
@@ -126,7 +96,7 @@ const Build = () => {
               Remover
             </Button>
           </div>
-        </div>
+        </div> */}
       </Main>
       <Footer>
         <Button size="md">Finalizar montagem</Button>
