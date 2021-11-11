@@ -29,7 +29,7 @@ const SignContainer = styled.div`
     .inputWrap {
       max-width: 500px;
       width: 100%;
-      height: 80px;
+      height: 55px;
 
       input {
         width: 100%;
@@ -111,6 +111,8 @@ const SignContainer = styled.div`
       justify-content: space-evenly;
 
       .inputWrap {
+        height: 60px;
+
         input {
           height: 60px;
           font-size: 24px;
