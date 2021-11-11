@@ -1,5 +1,7 @@
 import { Button } from "../../components/Button";
 import { Container, Header, Main, Footer } from "./style";
+import { BsCheckCircleFill } from "react-icons/bs";
+import { IoIosWarning } from "react-icons/io";
 
 const Build = () => {
   return (
@@ -11,6 +13,26 @@ const Build = () => {
         <div className="info">
           <h3 id="total">Valor total: R$ 1.750,00</h3>
           <h3 id="psu">Consumo estimado: 65W</h3>
+        </div>
+        {/* <div className="validation_status">
+          <div className="content">
+            <h3>
+              Inicie sua montagem para verificarmos a compatibilidade entre seus
+              componentes :)
+            </h3>
+          </div>
+        </div>
+        <div className="validation_status">
+          <div className="content fail">
+            <IoIosWarning></IoIosWarning>
+            <h3>Compatibilidade verificada com sucesso</h3>
+          </div>
+        </div> */}
+        <div className="validation_status">
+          <div className="content success">
+            <BsCheckCircleFill></BsCheckCircleFill>
+            <h3>Compatibilidade verificada com sucesso</h3>
+          </div>
         </div>
       </Header>
       <Main>

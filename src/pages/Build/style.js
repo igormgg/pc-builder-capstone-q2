@@ -6,6 +6,8 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.div`
+  padding-bottom: 40px;
+
   .text {
     width: 100%;
     height: 70px;
@@ -30,6 +32,45 @@ export const Header = styled.div`
 
     #total {
       min-width: 190px;
+    }
+  }
+
+  .validation_status {
+    padding: 20px 40px;
+    border: 2px solid var(--gray2);
+    min-height: 100px;
+    display: grid;
+    place-items: center;
+
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+
+      &.success {
+        svg {
+          color: var(--secondary-color);
+          font-size: 36px;
+          min-width: 36px;
+        }
+      }
+
+      &.fail {
+        svg {
+          color: var(--primary-color);
+          font-size: 36px;
+          min-width: 36px;
+        }
+      }
+
+      h3 {
+        max-width: 512px;
+        font-size: 24px;
+        font-size: calc(16px + 2 * ((100vw - 320px) / 680));
+        text-align: center;
+      }
     }
   }
 `;
