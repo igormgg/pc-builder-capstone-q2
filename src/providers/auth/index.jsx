@@ -7,20 +7,21 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(
-    JSON.parse(localStorage.getItem("PCBuilderToken")) || ""
+    JSON.parse(localStorage.getItem("userToken")) || ""
   );
 
   const history = useHistory();
 
   const signIn = (data) => {
     api
-      .post("login/", data)
+      .post("/login/", data)
       .then((response) => {
         localStorage.clear();
         localStorage.setItem(
-          "PCBuilderToken",
+          "userToken",
           JSON.stringify(response.data.accessToken)
         );
+        localStorage.setItem("userID", JSON.stringify(response.data.user.id));
         setToken(response.data.accessToken);
         history.push("/");
         toast.success(`Bem vindo ${response.data.user.name}`);
@@ -30,13 +31,14 @@ export const AuthProvider = ({ children }) => {
 
   const signUp = (data) => {
     api
-      .post("register/", data)
+      .post("/register/", data)
       .then((response) => {
         localStorage.clear();
         localStorage.setItem(
-          "PCBuilderToken",
+          "userToken",
           JSON.stringify(response.data.accessToken)
         );
+        localStorage.setItem("userID", JSON.stringify(response.data.user.id));
         setToken(response.data.accessToken);
         history.push("/");
         toast.success(`Bem vindo ${response.data.user.name}`);

@@ -1,17 +1,11 @@
 import styled from "styled-components";
 
 const SignContainer = styled.div`
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  #header {
-    width: 100%;
-    height: 60px;
-    background-color: var(--gray2);
-  }
 
   form {
     width: 100%;
