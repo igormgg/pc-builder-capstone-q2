@@ -1,5 +1,5 @@
 import { useModal } from "../../providers/modal"
-import { ModalContainer } from "./style"
+import { ModalContainer } from "./styles"
 
 const Modal = ({ children }) => {
     const { handleCloseModal } = useModal()
