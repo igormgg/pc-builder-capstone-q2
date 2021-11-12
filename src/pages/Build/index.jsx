@@ -8,22 +8,17 @@ import {
 import { BsCheckCircleFill } from "react-icons/bs";
 import { IoIosWarning } from "react-icons/io";
 import { useEffect, useState } from "react";
-import api from "../../services/api";
 import { useHistory } from "react-router";
 import Header from "../../components/Header";
+import { useBuild } from "../../providers/build";
 
 const Build = () => {
   const history = useHistory();
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    api.get("/products/").then((res) => setProducts(res.data));
-  }, []);
-
-  console.log(products);
+  const { buildSchema, removeFromBuild, buildTotal, buildWatts } = useBuild();
 
   const categorySchema = {
     cpu: "Processador",
+    cooler: "Cooler",
     gpu: "Placa de Vídeo",
     motherboard: "Placa Mãe",
     ram: "Memória Ram",
@@ -42,8 +37,14 @@ const Build = () => {
             <h3>Build</h3>
           </div>
           <div className="info">
-            <h3 id="total">Valor total: R$ 0,00</h3>
-            <h3 id="psu">Consumo estimado: 0W</h3>
+            <h3 id="total">
+              Valor total:{" "}
+              {buildTotal.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </h3>
+            <h3 id="psu">Consumo estimado: {buildWatts}W</h3>
           </div>
           <div className="validation_status">
             <div className="content">
@@ -68,7 +69,37 @@ const Build = () => {
         </ContainerHeader>
         <ContainerMain>
           {Object.entries(categorySchema).map((item, index) => {
-            return (
+            return buildSchema[item[0]].length ? (
+              buildSchema[item[0]].map((product, key) => {
+                return (
+                  <div className="card filled" key={key}>
+                    <div className="header">
+                      <img src={product.img} alt="" />
+                    </div>
+                    <div className="body">
+                      <h3 id="category">{item[1]}</h3>
+                      <h3 id="model">{product.model}</h3>
+                      <h3 id="price">
+                        Preço:{" "}
+                        {product.price.toLocaleString("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        })}
+                      </h3>
+                    </div>
+                    <div className="footer">
+                      <Button
+                        size="sm"
+                        variant="outlined"
+                        onClick={() => removeFromBuild(product.id, item[0])}
+                      >
+                        Remover
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
               <div className="card" key={index}>
                 <div className="content">
                   <h3>{item[1]}</h3>
@@ -107,7 +138,9 @@ const Build = () => {
         </div> */}
         </ContainerMain>
         <ContainerFooter>
-          <Button size="md">Finalizar montagem</Button>
+          <Button size="md" onClick={() => console.log(buildSchema)}>
+            Finalizar montagem
+          </Button>
         </ContainerFooter>
       </Container>
     </>
