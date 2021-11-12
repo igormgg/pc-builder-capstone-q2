@@ -28,16 +28,16 @@ const CategoryProducts = () => {
 
   const filter = products[category]
     ? products[category].filter(
-        (element) =>
-          element.model.toLowerCase().includes(searchInput.toLowerCase()) ||
-          element.price.toString().includes(searchInput) ||
-          Number(searchInput) <= element.price
-      )
+      (element) =>
+        element.model.toLowerCase().includes(searchInput.toLowerCase()) ||
+        element.price.toString().includes(searchInput) ||
+        Number(searchInput) <= element.price
+    )
     : [];
 
   return (
     <>
-      <Header button1="Login" button2="Registro" />
+      <Header buttonOut1="Login" buttonOut2="Registro" buttonIn1="Monte seu PC" buttonIn2="Logout" />
       <Container>
         <div id="banner">
           <h3>PRODUTOS</h3>
@@ -84,7 +84,9 @@ const CategoryProducts = () => {
                 <div id="contentDiv">
                   <div id="info">
                     <h3>{element.model}</h3>
-                    <p>Exibir detalhes</p>
+                    <p>
+                      Exibir detalhes <AiOutlinePlusCircle id="plusIcon" />
+                    </p>
                     <h3>Preço: {element.price.toFixed(2)}</h3>
                   </div>
                   <button
