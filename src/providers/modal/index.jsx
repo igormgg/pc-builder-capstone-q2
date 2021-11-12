@@ -8,7 +8,7 @@ export const ModalProvider = ({ children }) => {
     const [detailedProduct, setDetailedProduct] = useState({})
 
     const handleCloseModal = (e) => {
-        if (e.target.tagName === "svg") {
+        if (e.target.id === "modalContainer" || e.target.tagName === "svg" || e.target.tagName === "path") {
             setIsOpen(false)
         }
     }
