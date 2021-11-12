@@ -37,7 +37,7 @@ const CategoryProducts = () => {
 
   return (
     <>
-      <Header button1="Login" button2="Registro" />
+      <Header buttonOut1="Login" buttonOut2="Registro" buttonIn1="Monte seu PC" buttonIn2="Logout" />
       <Container>
         <div id="banner">
           <h3>PRODUTOS</h3>
