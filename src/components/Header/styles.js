@@ -79,11 +79,11 @@ export const HeaderContainer = styled.div`
 
   @media screen and (min-width: 769px) {
     #headerEnd {
-      gap: 15px;
+      gap: 25px;
       flex-direction: row-reverse;
 
       #buttonsDiv {
-        gap: 15px;
+        gap: 25px;
 
         button {
           width: 130px;
