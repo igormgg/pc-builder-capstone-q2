@@ -2,9 +2,11 @@ import styled from "styled-components";
 
 export const CartContainer = styled.div`
   width: 100%;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-height: calc(100vh - 60px);
 
   #topContainer {
     width: 100%;
@@ -34,6 +36,33 @@ export const CartContainer = styled.div`
         background: var(--gradient-1);
         border: none;
       }
+
+      :disabled {
+        background: none;
+        background-color: var(--gray3);
+      }
+    }
+  }
+  #backToShopping {
+    width: 250px;
+    height: 50px;
+    min-height: 50px;
+    color: var(--gray1);
+    background: var(--gradient-1);
+    border: none;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 600;
+
+    :hover {
+      color: var(--gray1);
+      border: solid 2px transparent;
+      border-radius: 8px;
+      background-image: linear-gradient(var(--gray4), var(--gray4)),
+        radial-gradient(circle at top left, #ff55bb, #ff4343);
+      background-origin: border-box;
+      background-clip: content-box, border-box;
     }
   }
 
@@ -43,6 +72,7 @@ export const CartContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
+    overflow-y: auto;
 
     li {
       width: 100%;
@@ -54,7 +84,7 @@ export const CartContainer = styled.div`
       align-items: center;
 
       #leftDiv {
-        width: 50%;
+        width: 85%;
         height: 100%;
         padding: 5px 0 5px 5px;
         display: flex;
@@ -133,6 +163,7 @@ export const CartContainer = styled.div`
   #checkoutButton {
     width: 250px;
     height: 50px;
+    min-height: 50px;
     color: var(--gray1);
     background: var(--gradient-1);
     border: none;
@@ -153,6 +184,8 @@ export const CartContainer = styled.div`
   }
 
   @media screen and (min-width: 769px) {
+    padding-bottom: 50px;
+
     #topContainer {
       margin-bottom: 30px;
 
@@ -173,6 +206,7 @@ export const CartContainer = styled.div`
         height: 154px;
 
         #leftDiv {
+          width: 50%;
           gap: 25px;
 
           img {
@@ -186,6 +220,7 @@ export const CartContainer = styled.div`
 
             h3 {
               font-size: 18px;
+              line-height: 1.4;
             }
 
             p {
@@ -214,7 +249,7 @@ export const CartContainer = styled.div`
     }
 
     #checkoutButton {
-      width: 650;
+      width: 650px;
       height: 60px;
       font-size: 18px;
     }
