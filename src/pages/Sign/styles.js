@@ -1,11 +1,13 @@
 import styled from "styled-components";
+import Logo from "../../assets/images/logo.png";
 
 const SignContainer = styled.div`
-  min-height: calc(100vh - 60px);
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 
   form {
     width: 100%;
@@ -76,6 +78,7 @@ const SignContainer = styled.div`
   #registerForm {
     padding-top: 3vh;
     border-top: 2px solid var(--gray2);
+    margin-bottom: 30px;
 
     button {
       color: var(--gray1);
@@ -98,9 +101,12 @@ const SignContainer = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: unset;
+    background-image: url(${Logo});
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 
     form {
-      margin-top: 70px;
       gap: unset;
       justify-content: space-evenly;
 
@@ -128,6 +134,7 @@ const SignContainer = styled.div`
       border-top: none;
       border-left: 2px solid var(--gray2);
       padding: 10px 0 20px 16px;
+      margin-bottom: unset;
     }
   }
 `;
