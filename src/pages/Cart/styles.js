@@ -112,6 +112,20 @@ export const CartContainer = styled.div`
           p {
             font-size: 10px;
             color: var(--gray2);
+
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            svg {
+              font-size: 14px;
+              color: var(--gray1);
+            }
+
+            :hover {
+              cursor: pointer;
+              filter: brightness(0.8);
+            }
           }
 
           span {
@@ -225,6 +239,11 @@ export const CartContainer = styled.div`
 
             p {
               font-size: 14px;
+
+              svg {
+                font-size: 18px;
+                color: var(--gray1);
+              }
             }
 
             span {

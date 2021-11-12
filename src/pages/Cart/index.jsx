@@ -7,8 +7,14 @@ import api from "../../services/api";
 import { useAuth } from "../../providers/auth";
 import { toast } from "react-toastify";
 import { Redirect, useHistory } from "react-router";
+import { useModal } from "../../providers/modal";
+import Modal from "../../components/Modal";
+import ModalDetails from "../../components/ModalDetails";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 const Cart = () => {
+  const { isOpen, handleOpenModal } = useModal();
+
   const [cart, setCart] = useState([]);
 
   const { token } = useAuth();
@@ -55,6 +61,11 @@ const Cart = () => {
 
   return (
     <>
+      {isOpen && (
+        <Modal>
+          <ModalDetails />
+        </Modal>
+      )}
       <Header cart={false} buttonIn1="Monte seu PC" buttonIn2="Logout" />
       <CartContainer>
         <div id="topContainer">
@@ -82,7 +93,11 @@ const Cart = () => {
                     <img src={item.img} alt={item.model} />
                     <div id="productDetails">
                       <h3>{item.model}</h3>
-                      <p>Exibir detalhes</p>
+                      <div>
+                        <p onClick={() => handleOpenModal(item)}>
+                          Exibir detalhes <AiOutlinePlusCircle />
+                        </p>
+                      </div>
                       <span>R$ {item.price.toFixed(2)}</span>
                     </div>
                   </div>
