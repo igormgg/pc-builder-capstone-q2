@@ -64,6 +64,7 @@ h3 {
             img {
                 width: 139px;
                 height: 139px;
+                object-fit: contain;
             }
         }
 
