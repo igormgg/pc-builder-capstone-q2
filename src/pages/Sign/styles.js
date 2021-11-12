@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Logo from "../../assets/images/logo.png";
+import Logo from "../../assets/images/gray3logo.png";
 
 const SignContainer = styled.div`
   height: 100%;
