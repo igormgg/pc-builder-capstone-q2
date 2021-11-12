@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Logo from "../../assets/images/logo.png";
 
 const SignContainer = styled.div`
   min-height: calc(100vh - 60px);
@@ -6,6 +7,8 @@ const SignContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 
   form {
     width: 100%;
@@ -98,6 +101,9 @@ const SignContainer = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: unset;
+    background-image: url(${Logo});
+    background-repeat: no-repeat;
+    background-size: contain;
 
     form {
       margin-top: 70px;
