@@ -17,6 +17,7 @@ export const BuildProvider = ({ children }) => {
 
   const [buildTotal, setBuildTotal] = useState(0);
   const [buildWatts, setBuildWatts] = useState(0);
+  const [buildProducts, setBuildProducts] = useState([]);
 
   useEffect(() => {
     let products = [];
@@ -31,6 +32,7 @@ export const BuildProvider = ({ children }) => {
 
     setBuildTotal(totalValue);
     setBuildWatts(totalWatts);
+    setBuildProducts(products);
   }, [buildSchema]);
 
   useEffect(() => {
@@ -39,13 +41,12 @@ export const BuildProvider = ({ children }) => {
     }
   }, []);
 
+  console.log(buildProducts);
+
   const addToBuild = (product, category) => {
     const newSet = {
       ...buildSchema,
-      [category]: [
-        ...buildSchema[category],
-        { ...product, id: buildSchema[category].length + 1 },
-      ],
+      [category]: [...buildSchema[category], product],
     };
     setBuildSchema(newSet);
     localStorage.setItem("build", JSON.stringify(newSet));
