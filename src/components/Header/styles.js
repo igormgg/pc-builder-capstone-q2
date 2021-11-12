@@ -33,10 +33,10 @@ export const HeaderContainer = styled.div`
         width: 80px;
         height: 30px;
         border-radius: 8px;
-        color: var(--gray1);
       }
 
       #button1 {
+        color: var(--gray1);
         border: solid 2px transparent;
         background-image: linear-gradient(var(--gray4), var(--gray4)),
           radial-gradient(circle at top left, #21b1b8, #76f3c6);
@@ -46,14 +46,17 @@ export const HeaderContainer = styled.div`
         :hover {
           border: none;
           background: var(--gradient-2);
+          color: var(--gray4);
         }
       }
 
       #button2 {
         border: none;
         background: var(--gradient-2);
+        color: var(--gray4);
 
         :hover {
+          color: var(--gray1);
           border: solid 2px transparent;
           background-image: linear-gradient(var(--gray4), var(--gray4)),
             radial-gradient(circle at top left, #21b1b8, #76f3c6);
