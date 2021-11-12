@@ -114,6 +114,7 @@ export const ContainerMain = styled.div`
       h3 {
         font-size: 24px;
         font-weight: bold;
+        text-align: center;
       }
     }
 
@@ -134,6 +135,7 @@ export const ContainerMain = styled.div`
         img {
           width: 130px;
           height: 130px;
+          object-fit: contain;
         }
       }
 
@@ -144,6 +146,10 @@ export const ContainerMain = styled.div`
         align-items: center;
         justify-content: space-between;
         padding: 10px 0;
+
+        #model {
+          text-align: center;
+        }
 
         #category {
           font-size: 14px;

@@ -9,33 +9,47 @@ import {
 export const BuildContext = createContext();
 
 export const BuildProvider = ({ children }) => {
-  const [build, setBuild] = useState({});
+  const [buildSchema, setBuildSchema] = useState({
+    cpu: [],
+    cooler: [],
+    gpu: [],
+    motherboard: [],
+    ram: [],
+    drive: [],
+    case: [],
+    font: [],
+    peripherals: [],
+  });
 
   useEffect(() => {
     if (localStorage.getItem("build")) {
-      setBuild(JSON.parse(localStorage.getItem("build")));
-    } else {
-      const buildSchema = {
-        cpu: [],
-        gpu: [],
-        motherboard: [],
-        ram: [],
-        drive: [],
-        case: [],
-        font: [],
-        peripherals: [],
-      };
-      setBuild(buildSchema);
-      localStorage.setItem("build", JSON.stringify(buildSchema));
+      setBuildSchema(JSON.parse(localStorage.getItem("build")));
     }
   }, []);
 
   const addToBuild = (product, category) => {
-    console.log("Add to build: ", product, category);
+    const newSet = {
+      ...buildSchema,
+      [category]: [
+        ...buildSchema[category],
+        { ...product, id: buildSchema[category].length + 1 },
+      ],
+    };
+    setBuildSchema(newSet);
+    localStorage.setItem("build", JSON.stringify(newSet));
+  };
+
+  const removeFromBuild = (id, category) => {
+    const newSet = {
+      ...buildSchema,
+      [category]: buildSchema[category].filter((item) => item.id !== id),
+    };
+    setBuildSchema(newSet);
+    localStorage.setItem("build", JSON.stringify(newSet));
   };
 
   return (
-    <BuildContext.Provider value={{ build, addToBuild }}>
+    <BuildContext.Provider value={{ addToBuild, buildSchema, removeFromBuild }}>
       {children}
     </BuildContext.Provider>
   );

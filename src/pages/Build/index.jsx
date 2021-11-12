@@ -8,22 +8,17 @@ import {
 import { BsCheckCircleFill } from "react-icons/bs";
 import { IoIosWarning } from "react-icons/io";
 import { useEffect, useState } from "react";
-import api from "../../services/api";
 import { useHistory } from "react-router";
 import Header from "../../components/Header";
+import { useBuild } from "../../providers/build";
 
 const Build = () => {
   const history = useHistory();
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    api.get("/products/").then((res) => setProducts(res.data));
-  }, []);
-
-  console.log(products);
+  const { buildSchema, removeFromBuild } = useBuild();
 
   const categorySchema = {
     cpu: "Processador",
+    cooler: "Cooler",
     gpu: "Placa de Vídeo",
     motherboard: "Placa Mãe",
     ram: "Memória Ram",
@@ -68,7 +63,37 @@ const Build = () => {
         </ContainerHeader>
         <ContainerMain>
           {Object.entries(categorySchema).map((item, index) => {
-            return (
+            return buildSchema[item[0]].length ? (
+              buildSchema[item[0]].map((product, key) => {
+                return (
+                  <div className="card filled" key={key}>
+                    <div className="header">
+                      <img src={product.img} alt="" />
+                    </div>
+                    <div className="body">
+                      <h3 id="category">{item[1]}</h3>
+                      <h3 id="model">{product.model}</h3>
+                      <h3 id="price">
+                        Preço:{" "}
+                        {product.price.toLocaleString("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        })}
+                      </h3>
+                    </div>
+                    <div className="footer">
+                      <Button
+                        size="sm"
+                        variant="outlined"
+                        onClick={() => removeFromBuild(product.id, item[0])}
+                      >
+                        Remover
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
               <div className="card" key={index}>
                 <div className="content">
                   <h3>{item[1]}</h3>
@@ -107,7 +132,9 @@ const Build = () => {
         </div> */}
         </ContainerMain>
         <ContainerFooter>
-          <Button size="md">Finalizar montagem</Button>
+          <Button size="md" onClick={() => console.log(buildSchema)}>
+            Finalizar montagem
+          </Button>
         </ContainerFooter>
       </Container>
     </>
