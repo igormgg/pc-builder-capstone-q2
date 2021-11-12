@@ -1,16 +1,16 @@
-import Header from "../../components/Header";
-import { CartContainer } from "./styles";
-import { FaTrash } from "react-icons/fa";
-import { useState } from "react/cjs/react.development";
-import { useEffect } from "react";
 import api from "../../services/api";
-import { useAuth } from "../../providers/auth";
-import { toast } from "react-toastify";
-import { Redirect, useHistory } from "react-router";
-import { useModal } from "../../providers/modal";
+import Header from "../../components/Header";
 import Modal from "../../components/Modal";
 import ModalDetails from "../../components/ModalDetails";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import { CartContainer } from "./styles";
+import { FaTrash } from "react-icons/fa";
+import { Redirect, useHistory } from "react-router";
+import { toast } from "react-toastify";
+import { useAuth } from "../../providers/auth";
+import { useEffect } from "react";
+import { useModal } from "../../providers/modal";
+import { useState } from "react/cjs/react.development";
 
 const Cart = () => {
   const { isOpen, handleOpenModal } = useModal();
@@ -93,11 +93,9 @@ const Cart = () => {
                     <img src={item.img} alt={item.model} />
                     <div id="productDetails">
                       <h3>{item.model}</h3>
-                      <div>
-                        <p onClick={() => handleOpenModal(item)}>
-                          Exibir detalhes <AiOutlinePlusCircle />
-                        </p>
-                      </div>
+                      <p onClick={() => handleOpenModal(item)}>
+                        Exibir detalhes <AiOutlinePlusCircle />
+                      </p>
                       <span>R$ {item.price.toFixed(2)}</span>
                     </div>
                   </div>
