@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+    min-height: calc(100vh - 60px);
 
 #banner {
 min-width: 288px;
@@ -35,11 +36,8 @@ color: var(--gray4);
 }
 
 #products {
-    margin: 0 auto;
-    margin-top: 20px;
+    margin: 20px auto;
     border-top: 2px solid var(--gray2);
-    overflow-y: auto;
-    height: 70vh;
     
     #card {
         border: 2px solid transparent;
