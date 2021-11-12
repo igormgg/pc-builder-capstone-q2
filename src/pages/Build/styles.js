@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding: 20px;
+  padding: 20px 0;
   min-width: 230px;
 `;
 
-export const Header = styled.div`
+export const ContainerHeader = styled.div`
   padding-bottom: 40px;
 
   .text {
@@ -77,7 +77,7 @@ export const Header = styled.div`
   }
 `;
 
-export const Main = styled.div`
+export const ContainerMain = styled.div`
   padding: 40px 0;
   border-top: 2px solid var(--gray2);
   border-bottom: 2px solid var(--gray2);
@@ -163,7 +163,7 @@ export const Main = styled.div`
   }
 `;
 
-export const Footer = styled.div`
+export const ContainerFooter = styled.div`
   padding: 20px 0;
   display: flex;
   justify-content: flex-end;

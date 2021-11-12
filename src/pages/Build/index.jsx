@@ -1,10 +1,16 @@
 import { Button } from "../../components/Button";
-import { Container, Header, Main, Footer } from "./styles";
+import {
+  Container,
+  ContainerHeader,
+  ContainerMain,
+  ContainerFooter,
+} from "./styles";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { IoIosWarning } from "react-icons/io";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { useHistory } from "react-router";
+import Header from "../../components/Header";
 
 const Build = () => {
   const history = useHistory();
@@ -28,56 +34,58 @@ const Build = () => {
   };
 
   return (
-    <Container>
-      <Header>
-        <div className="text">
-          <h3>Build</h3>
-        </div>
-        <div className="info">
-          <h3 id="total">Valor total: R$ 0,00</h3>
-          <h3 id="psu">Consumo estimado: 0W</h3>
-        </div>
-        <div className="validation_status">
-          <div className="content">
-            <h3>
-              Inicie sua montagem para verificarmos a compatibilidade entre seus
-              componentes :)
-            </h3>
+    <>
+      <Header button1="Produtos" button2="Registro"></Header>
+      <Container>
+        <ContainerHeader>
+          <div className="text">
+            <h3>Build</h3>
           </div>
-        </div>
-        {/* <div className="validation_status">
+          <div className="info">
+            <h3 id="total">Valor total: R$ 0,00</h3>
+            <h3 id="psu">Consumo estimado: 0W</h3>
+          </div>
+          <div className="validation_status">
+            <div className="content">
+              <h3>
+                Inicie sua montagem para verificarmos a compatibilidade entre
+                seus componentes :)
+              </h3>
+            </div>
+          </div>
+          {/* <div className="validation_status">
           <div className="content fail">
             <IoIosWarning></IoIosWarning>
             <h3>Incompatibilidade detectada</h3>
           </div>
         </div> */}
-        {/* <div className="validation_status">
+          {/* <div className="validation_status">
           <div className="content success">
             <BsCheckCircleFill></BsCheckCircleFill>
             <h3>Compatibilidade verificada com sucesso</h3>
           </div>
         </div> */}
-      </Header>
-      <Main>
-        {Object.entries(categorySchema).map((item, index) => {
-          return (
-            <div className="card" key={index}>
-              <div className="content">
-                <h3>{item[1]}</h3>
+        </ContainerHeader>
+        <ContainerMain>
+          {Object.entries(categorySchema).map((item, index) => {
+            return (
+              <div className="card" key={index}>
+                <div className="content">
+                  <h3>{item[1]}</h3>
+                </div>
+                <div className="footer">
+                  <Button
+                    size="sm"
+                    onClick={() => history.push(`/build/${item[0]}`)}
+                  >
+                    Adicionar
+                  </Button>
+                </div>
               </div>
-              <div className="footer">
-                <Button
-                  size="sm"
-                  onClick={() => history.push(`/build/${item[0]}`)}
-                >
-                  Adicionar
-                </Button>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
 
-        {/*
+          {/*
 
         <div className="card filled">
           <div className="header">
@@ -97,11 +105,12 @@ const Build = () => {
             </Button>
           </div>
         </div> */}
-      </Main>
-      <Footer>
-        <Button size="md">Finalizar montagem</Button>
-      </Footer>
-    </Container>
+        </ContainerMain>
+        <ContainerFooter>
+          <Button size="md">Finalizar montagem</Button>
+        </ContainerFooter>
+      </Container>
+    </>
   );
 };
 
