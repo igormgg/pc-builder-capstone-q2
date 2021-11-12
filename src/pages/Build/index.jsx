@@ -35,7 +35,7 @@ const Build = () => {
 
   return (
     <>
-      <Header button1="Produtos" button2="Registro"></Header>
+      <Header button1="Login" button2="Registro"></Header>
       <Container>
         <ContainerHeader>
           <div className="text">
