@@ -6,13 +6,16 @@ export const Container = styled.div`
 #banner {
 min-width: 288px;
 max-width: 1500px;
-height: 60px;
+height: 70px;
 background-color: var(--secondary-color);
 display: grid;
 place-items: center;
 margin: 20px auto;
-margin-top: 0;
 color: var(--gray4);
+
+h3 {
+    font-size: 36px;
+}
 }
 
 #searchInput {
@@ -40,11 +43,8 @@ color: var(--gray4);
     border-top: 2px solid var(--gray2);
     
     #card {
-        border: 2px solid transparent;
+        border: 2px solid var(--gray3);
         border-radius: 5px;
-        background-image: linear-gradient(var(--gray4), var(--gray4)), radial-gradient(circle at top left, #FF55BB, #FF4343);
-        background-origin: border-box;
-        background-clip: content-box, border-box;
         width: 235px;
         height: 400px;
         display: flex;
@@ -120,6 +120,13 @@ color: var(--gray4);
                     background-clip: content-box, border-box;
                 }
             }
+        }
+
+        :hover {
+            border: 2px solid transparent;
+            background-image: linear-gradient(var(--gray4), var(--gray4)), radial-gradient(circle at top left, #FF55BB, #FF4343);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
         }
     }
 
