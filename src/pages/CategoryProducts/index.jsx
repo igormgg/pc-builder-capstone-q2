@@ -4,11 +4,14 @@ import { Container } from "./styles";
 import api from "../../services/api.js";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import Header from "../../components/Header";
+import { useBuild } from "../../providers/build";
 
 const CategoryProducts = () => {
   const history = useHistory();
 
   const { category } = useParams();
+
+  const { addToBuild } = useBuild();
 
   const [products, setProducts] = useState({});
 
@@ -60,9 +63,13 @@ const CategoryProducts = () => {
                     <p>
                       Exibir detalhes <AiOutlinePlusCircle id="plusIcon" />
                     </p>
-                    <h3>Preço: {element.price}</h3>
+                    <h3>Preço: R$ {element.price.toFixed(2)}</h3>
                   </div>
-                  <button onClick={() => history.push("/build")}>
+                  <button
+                    onClick={() => (
+                      addToBuild(element, category), history.push("/build")
+                    )}
+                  >
                     Adicionar
                   </button>
                 </div>
@@ -78,9 +85,15 @@ const CategoryProducts = () => {
                   <div id="info">
                     <h3>{element.model}</h3>
                     <p>Exibir detalhes</p>
-                    <h3>Preço: {element.price}</h3>
+                    <h3>Preço: {element.price.toFixed(2)}</h3>
                   </div>
-                  <button>Adicionar</button>
+                  <button
+                    onClick={() => (
+                      addToBuild(element, category), history.push("/build")
+                    )}
+                  >
+                    Adicionar
+                  </button>
                 </div>
               </div>
             ))

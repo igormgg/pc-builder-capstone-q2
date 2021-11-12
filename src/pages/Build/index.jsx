@@ -14,7 +14,7 @@ import { useBuild } from "../../providers/build";
 
 const Build = () => {
   const history = useHistory();
-  const { buildSchema, removeFromBuild } = useBuild();
+  const { buildSchema, removeFromBuild, buildTotal, buildWatts } = useBuild();
 
   const categorySchema = {
     cpu: "Processador",
@@ -37,8 +37,14 @@ const Build = () => {
             <h3>Build</h3>
           </div>
           <div className="info">
-            <h3 id="total">Valor total: R$ 0,00</h3>
-            <h3 id="psu">Consumo estimado: 0W</h3>
+            <h3 id="total">
+              Valor total:{" "}
+              {buildTotal.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </h3>
+            <h3 id="psu">Consumo estimado: {buildWatts}W</h3>
           </div>
           <div className="validation_status">
             <div className="content">
