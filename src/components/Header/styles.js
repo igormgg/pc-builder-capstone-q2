@@ -65,6 +65,11 @@ export const HeaderContainer = styled.div`
     svg {
       font-size: 26px;
       color: var(--gray1);
+
+      :hover {
+        cursor: pointer;
+        filter: brightness(0.7);
+      }
     }
   }
 
