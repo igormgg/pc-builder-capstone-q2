@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import api from "../../services/api";
 import { useAuth } from "../../providers/auth";
 import { toast } from "react-toastify";
-import { useHistory } from "react-router";
+import { Redirect, useHistory } from "react-router";
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
@@ -49,9 +49,13 @@ const Cart = () => {
     toast.success(`Todos os produtos foram removidos do carrinho.`);
   };
 
+  if (!token) {
+    return <Redirect to="/sign" />;
+  }
+
   return (
     <>
-      <Header cart={false} button1="Produtos" button2="Monte seu PC" />
+      <Header cart={false} buttonIn1="Monte seu PC" buttonIn2="Logout" />
       <CartContainer>
         <div id="topContainer">
           <h1>Carrinho</h1>
