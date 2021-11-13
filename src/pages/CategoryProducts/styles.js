@@ -92,7 +92,7 @@ h3 {
                     line-height: 16px;
                     color: var(--gray2);
                     display: flex;
-                    gap: 10px;
+                    gap: 5px;
                     align-items: center;
     
                     #plusIcon {
