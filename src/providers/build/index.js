@@ -53,10 +53,17 @@ export const BuildProvider = ({ children }) => {
   };
 
   const removeFromBuild = (id, category) => {
+    const targetIndex = buildSchema[category].findIndex(
+      (item) => item.productID === id
+    );
+
     const newSet = {
       ...buildSchema,
-      [category]: buildSchema[category].filter((item) => item.id !== id),
+      [category]: buildSchema[category].filter(
+        (_, index) => index !== targetIndex
+      ),
     };
+
     setBuildSchema(newSet);
     localStorage.setItem("build", JSON.stringify(newSet));
   };

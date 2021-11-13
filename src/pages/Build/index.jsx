@@ -91,7 +91,9 @@ const Build = () => {
                       <Button
                         size="sm"
                         variant="outlined"
-                        onClick={() => removeFromBuild(product.id, item[0])}
+                        onClick={() =>
+                          removeFromBuild(product.productID, item[0])
+                        }
                       >
                         Remover
                       </Button>
