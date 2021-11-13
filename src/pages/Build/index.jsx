@@ -14,7 +14,13 @@ import { useBuild } from "../../providers/build";
 
 const Build = () => {
   const history = useHistory();
-  const { buildSchema, removeFromBuild, buildTotal, buildWatts } = useBuild();
+  const {
+    buildSchema,
+    removeFromBuild,
+    buildTotal,
+    buildWatts,
+    buildCheckout,
+  } = useBuild();
 
   const categorySchema = {
     cpu: "Processador",
@@ -30,7 +36,12 @@ const Build = () => {
 
   return (
     <>
-      <Header button1="Login" button2="Registro"></Header>
+      <Header
+        buttonIn1="Produtos"
+        buttonIn2="Logout"
+        buttonOut1="Login"
+        buttonOut2="Produtos"
+      ></Header>
       <Container>
         <ContainerHeader>
           <div className="text">
@@ -91,7 +102,9 @@ const Build = () => {
                       <Button
                         size="sm"
                         variant="outlined"
-                        onClick={() => removeFromBuild(product.id, item[0])}
+                        onClick={() =>
+                          removeFromBuild(product.productID, item[0])
+                        }
                       >
                         Remover
                       </Button>
@@ -138,7 +151,7 @@ const Build = () => {
         </div> */}
         </ContainerMain>
         <ContainerFooter>
-          <Button size="md" onClick={() => console.log(buildSchema)}>
+          <Button size="md" onClick={() => buildCheckout()}>
             Finalizar montagem
           </Button>
         </ContainerFooter>
