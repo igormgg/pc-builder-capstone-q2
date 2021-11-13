@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../providers/auth";
 import { useEffect } from "react";
 import { useModal } from "../../providers/modal";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 
 const Cart = () => {
   const { isOpen, handleOpenModal } = useModal();
