@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { toast } from "react-toastify";
 import api from "../../services/api";
 import { useAuth } from "../auth";
 
@@ -23,7 +24,6 @@ export const BuildProvider = ({ children }) => {
   const [buildProducts, setBuildProducts] = useState([]);
   const { token } = useAuth();
   const history = useHistory();
-  const [userId, setUserId] = useState(localStorage.getItem("userID") || "");
 
   useEffect(() => {
     let products = [];
@@ -75,31 +75,32 @@ export const BuildProvider = ({ children }) => {
   };
 
   const buildCheckout = () => {
+    const userId = localStorage.getItem("userID");
+
     if (token) {
       buildProducts.map((item) => {
-        api
-          .post(
-            "/cart/",
-            { ...item, userId: userId },
-            { headers: { Authorization: `Bearer ${token}` } }
-          )
-          .then(() => {
-            localStorage.removeItem("build");
-            setBuildSchema({
-              cpu: [],
-              cooler: [],
-              gpu: [],
-              motherboard: [],
-              ram: [],
-              drive: [],
-              case: [],
-              font: [],
-              peripherals: [],
-            });
-            history.push("/cart/");
-          });
+        api.post(
+          "/cart/",
+          { ...item, userId: userId },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
       });
+      toast.success("Produtos enviados ao carrinho");
+      localStorage.removeItem("build");
+      setBuildSchema({
+        cpu: [],
+        cooler: [],
+        gpu: [],
+        motherboard: [],
+        ram: [],
+        drive: [],
+        case: [],
+        font: [],
+        peripherals: [],
+      });
+      history.push("/cart/");
     } else {
+      toast.info("Efetue login para finalizar a montagem");
       history.push("/sign");
     }
   };
