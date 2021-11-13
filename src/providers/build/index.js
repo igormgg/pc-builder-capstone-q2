@@ -24,7 +24,7 @@ export const BuildProvider = ({ children }) => {
   const [buildProducts, setBuildProducts] = useState([]);
   const { token } = useAuth();
   const history = useHistory();
-  const [checkErrors, setCheckErrors] = useState({});
+  const [checkErrors, setCheckErrors] = useState([]);
 
   useEffect(() => {
     let products = [];
@@ -51,45 +51,14 @@ export const BuildProvider = ({ children }) => {
 
   const checkCompatibility = () => {
     // reset all props
-    let errorsStatus = {
-      cpu: "",
-      cooler: "",
-      gpu: "",
-      motherboard: "",
-      ram: "",
-      drive: "",
-      case: "",
-      font: "",
-      peripherals: "",
-    };
+    let errorMsgs = [];
 
-    //check Mobo and CPU compatibility
-    const cpu = buildSchema["cpu"][0]?.socket.replace(/ /g, "") || "";
+    // variables used to check compatibility
+    const cpuSocket = buildSchema["cpu"][0]?.socket.replace(/ /g, "") || "";
+    const cpuCoolerBox = buildSchema["cpu"][0]?.coolerBox || false;
     const integratedGraphics = buildSchema["cpu"][0]?.graphics || false;
-    const mobo = buildSchema["motherboard"][0]?.socket.replace(/ /g, "") || "";
-    if (cpu && mobo && !mobo.includes(cpu)) {
-      errorsStatus = {
-        ...errorsStatus,
-        cpu: `Incompatibilidade com o Processador - Socket ${cpu}`,
-        motherboard: `Incompatibilidade com a Placa Mãe - Socket ${mobo}`,
-      };
-    }
-
-    if (cpu && !integratedGraphics && mobo && !buildSchema["gpu"].length) {
-      errorsStatus = {
-        ...errorsStatus,
-        gpu: `Processador atual não possui vídeo integrado; Requer adicição de uma Placa de Vídeo dedicada`,
-      };
-    }
-
-    // Check Cooler compatibility
-
-    const cooler = buildSchema["cooler"][0]?.socketCompatibility || "";
-    if (cpu && cooler && !cooler.includes(cpu)) {
-      errorsStatus.cooler = `O Cooler escolhido não possui suporte ao Socket atual: ${cpu}`;
-    }
-
-    //check Ram and Mobo compatibility **needs to improve DB info
+    const moboSocket =
+      buildSchema["motherboard"][0]?.socket.replace(/ /g, "") || "";
     const mbSlots = buildSchema["motherboard"][0]?.memory?.slots;
     const mbMax = buildSchema["motherboard"][0]?.memory?.max;
     const ramTotal = buildSchema["ram"].reduce(
@@ -97,25 +66,61 @@ export const BuildProvider = ({ children }) => {
       0
     );
     const ramSlots = buildSchema["ram"].length;
-    if (mbMax && ramTotal && ramTotal > mbMax) {
-      errorsStatus = {
-        ...errorsStatus,
-        ram: `A quantidade de memória excede o limite da Placa Mãe - Quantidade: ${ramTotal}`,
-        motherboard: `Quantidade de memória excede os limites da Placa Mãe - Limite: ${mbMax}`,
-      };
-    } else if (ramSlots > mbSlots) {
-      errorsStatus = {
-        ...errorsStatus,
-        ram: `A quantidade de memória excede a quantidade de slots da Placa Mãe - Quantidade: ${ramSlots}`,
-        motherboard: `Quantidade de pentes de memória excede os limites da Placa Mãe - Limite: ${mbSlots}`,
-      };
-    }
-    console.log("Ram slots and MB Slots", ramSlots, mbSlots);
 
-    setCheckErrors(errorsStatus);
+    //check Mobo and CPU compatibility
+    if (cpuSocket && moboSocket && !moboSocket.includes(cpuSocket)) {
+      errorMsgs.push(
+        `Incompatibilidade com o Processador - Socket ${cpuSocket}`
+      );
+      errorMsgs.push(
+        `Incompatibilidade com a Placa Mãe - Socket ${moboSocket}`
+      );
+    }
+
+    //check if CPU includes integraded Graphics
+    if (cpuSocket && !integratedGraphics && !buildSchema.gpu.length) {
+      errorMsgs.push("O processador atual requer uma placa de vídeo dedicada");
+    }
+
+    //check if CPU includes a Cooler
+    if (cpuSocket && !cpuCoolerBox && !buildSchema["cooler"].length) {
+      errorMsgs.push(
+        "O processador atual não acompanha um cooler - Requer adicição de um Cooler à parte"
+      );
+    }
+
+    console.log(cpuCoolerBox);
+
+    // Check Cooler compatibility
+
+    const cooler = buildSchema["cooler"][0]?.socketCompatibility || "";
+    if (cpuSocket && cooler && !cooler.includes(cpuSocket)) {
+      errorMsgs.push(
+        `O Cooler escolhido não possui suporte ao Socket atual: ${cpuSocket}`
+      );
+    }
+
+    //check Ram and Mobo compatibility **needs to improve DB info
+
+    console.log(mbMax, ramTotal);
+    if (mbMax && ramTotal && ramTotal > mbMax) {
+      errorMsgs.push(
+        `A quantidade de memória excede o limite da Placa Mãe - Quantidade: ${ramTotal} / ${mbMax}`
+      );
+    } else if (ramSlots > mbSlots) {
+      errorMsgs.push(
+        `A quantidade de memória excede a quantidade de slots da Placa Mãe - Quantidade: ${ramSlots}`
+      );
+    }
+    // console.log("Ram slots and MB Slots", ramSlots, mbSlots);
+
+    // setCheckErrors(errorsStatus);
+
+    console.log(integratedGraphics);
+    setCheckErrors(errorMsgs);
   };
 
-  console.log(buildProducts);
+  // console.log(buildProducts);
   console.log(checkErrors);
 
   const addToBuild = (product, category) => {
@@ -183,6 +188,7 @@ export const BuildProvider = ({ children }) => {
         buildWatts,
         buildTotal,
         buildCheckout,
+        checkErrors,
       }}
     >
       {children}

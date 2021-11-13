@@ -20,6 +20,7 @@ const Build = () => {
     buildTotal,
     buildWatts,
     buildCheckout,
+    checkErrors,
   } = useBuild();
 
   const categorySchema = {
@@ -57,26 +58,35 @@ const Build = () => {
             </h3>
             <h3 id="psu">Consumo estimado: {buildWatts}W</h3>
           </div>
-          <div className="validation_status">
-            <div className="content">
-              <h3>
-                Inicie sua montagem para verificarmos a compatibilidade entre
-                seus componentes :)
-              </h3>
+          {checkErrors.every((item) => !item) && !buildTotal && (
+            <div className="validation_status">
+              <div className="content">
+                <h3>
+                  Inicie sua montagem para verificarmos a compatibilidade entre
+                  seus componentes :)
+                </h3>
+              </div>
             </div>
-          </div>
-          {/* <div className="validation_status">
-          <div className="content fail">
-            <IoIosWarning></IoIosWarning>
-            <h3>Incompatibilidade detectada</h3>
-          </div>
-        </div> */}
-          {/* <div className="validation_status">
-          <div className="content success">
-            <BsCheckCircleFill></BsCheckCircleFill>
-            <h3>Compatibilidade verificada com sucesso</h3>
-          </div>
-        </div> */}
+          )}
+          {checkErrors.some((item) => item) && (
+            <div className="validation_status">
+              <div className="content fail">
+                <IoIosWarning></IoIosWarning>
+                <h3>Incompatibilidade detectada</h3>
+                {checkErrors.map((item) => {
+                  return <p>{item}</p>;
+                })}
+              </div>
+            </div>
+          )}
+          {checkErrors.every((item) => !item) && !!buildTotal && (
+            <div className="validation_status">
+              <div className="content success">
+                <BsCheckCircleFill></BsCheckCircleFill>
+                <h3>Compatibilidade verificada com sucesso</h3>
+              </div>
+            </div>
+          )}
         </ContainerHeader>
         <ContainerMain>
           {Object.entries(categorySchema).map((item, index) => {
