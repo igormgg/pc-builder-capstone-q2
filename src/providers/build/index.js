@@ -94,9 +94,9 @@ export const BuildProvider = ({ children }) => {
     // Check Cooler compatibility
 
     const cooler = buildSchema["cooler"][0]?.socketCompatibility || "";
-    if (cpuSocket && cooler && !cooler.includes(cpuSocket)) {
+    if (moboSocket && cooler && !cooler.includes(moboSocket)) {
       errorMsgs.push(
-        `O Cooler escolhido não possui suporte ao Socket atual: ${cpuSocket}`
+        `O Cooler escolhido não possui suporte ao Socket atual: ${moboSocket}`
       );
     }
 

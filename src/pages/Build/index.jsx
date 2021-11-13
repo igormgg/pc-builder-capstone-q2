@@ -74,7 +74,7 @@ const Build = () => {
                 <IoIosWarning></IoIosWarning>
                 <h3>Incompatibilidade detectada</h3>
                 {checkErrors.map((item) => {
-                  return <p>{item}</p>;
+                  return <p key={item}>{item}</p>;
                 })}
               </div>
             </div>
@@ -93,50 +93,44 @@ const Build = () => {
             return buildSchema[item[0]].length ? (
               buildSchema[item[0]].map((product, key) => {
                 return (
-                  <>
-                    {["gpu", "ram", "monitor"].includes(item[0]) && key < 1 && (
-                      <div className="card" key={index}>
-                        <div className="content">
-                          <h3>{item[1]}</h3>
-                        </div>
-                        <div className="footer">
-                          <Button
-                            size="sm"
-                            onClick={() => history.push(`/build/${item[0]}`)}
-                          >
-                            Adicionar
-                          </Button>
-                        </div>
-                      </div>
-                    )}
-                    <div className="card filled" key={key}>
-                      <div className="header">
-                        <img src={product.img} alt="" />
-                      </div>
-                      <div className="body">
-                        <h3 id="category">{item[1]}</h3>
-                        <h3 id="model">{product.model}</h3>
-                        <h3 id="price">
-                          Preço:{" "}
-                          {product.price.toLocaleString("pt-BR", {
-                            style: "currency",
-                            currency: "BRL",
-                          })}
-                        </h3>
-                      </div>
-                      <div className="footer">
-                        <Button
-                          size="sm"
-                          variant="outlined"
-                          onClick={() =>
-                            removeFromBuild(product.productID, item[0])
-                          }
-                        >
-                          Remover
-                        </Button>
-                      </div>
+                  <div className="card filled" key={key}>
+                    <div className="header">
+                      <img src={product.img} alt="" />
                     </div>
-                  </>
+                    <div className="body">
+                      <h3 id="category">{item[1]}</h3>
+                      <h3 id="model">{product.model}</h3>
+                      <h3 id="price">
+                        Preço:{" "}
+                        {product.price.toLocaleString("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        })}
+                      </h3>
+                    </div>
+                    <div className="footer">
+                      <Button
+                        size="sm"
+                        variant="outlined"
+                        onClick={() =>
+                          removeFromBuild(product.productID, item[0])
+                        }
+                      >
+                        Remover
+                      </Button>
+                      {["gpu", "ram", "peripherals", "drive"].includes(
+                        item[0]
+                      ) && (
+                        <Button
+                          size="us"
+                          variant="outlined"
+                          onClick={() => history.push(`/build/${item[0]}`)}
+                        >
+                          +
+                        </Button>
+                      )}
+                    </div>
+                  </div>
                 );
               })
             ) : (

@@ -120,8 +120,9 @@ export const ContainerMain = styled.div`
 
     .footer {
       width: 100%;
-      display: grid;
-      place-items: center;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
       padding: 15px;
     }
 

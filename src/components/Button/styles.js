@@ -20,6 +20,10 @@ export const StyledButton = styled.button`
     props.size === "md" && { width: "100%", maxWidth: "250px", height: "50px" }}
     ${(props) =>
     props.size === "lg" && { width: "100%", maxWidth: "650px", height: "60px" }}
+    ${(props) =>
+    props.size === "us" && { width: "40px", maxWidth: "250px", height: "40px" }}
+
+    
 
   :hover {
     ${(props) =>
