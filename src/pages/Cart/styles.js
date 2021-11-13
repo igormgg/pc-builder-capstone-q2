@@ -92,9 +92,11 @@ export const CartContainer = styled.div`
         gap: 5px;
 
         img {
-          width: 50px;
-          height: 100%;
-          background-color: var(--gray1);
+          width: 60px;
+          min-width: 60px;
+          height: 60px;
+          object-fit: contain;
+          background-color: white;
         }
 
         #productDetails {
@@ -107,6 +109,11 @@ export const CartContainer = styled.div`
           h3 {
             font-size: 12px;
             color: var(--gray1);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
           }
 
           p {
@@ -220,13 +227,13 @@ export const CartContainer = styled.div`
         height: 154px;
 
         #leftDiv {
-          width: 50%;
+          width: 60%;
           gap: 25px;
 
           img {
             width: 140px;
-            height: 100%;
-            background-color: var(--gray1);
+            min-width: 140px;
+            height: 140px;
           }
 
           #productDetails {

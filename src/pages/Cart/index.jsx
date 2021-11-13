@@ -21,9 +21,11 @@ const Cart = () => {
 
   const history = useHistory();
 
+  const userID = localStorage.getItem("userID") || "";
+
   useEffect(() => {
     api
-      .get("/cart", {
+      .get(`/cart?userId=${userID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
