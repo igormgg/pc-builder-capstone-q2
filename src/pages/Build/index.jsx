@@ -93,33 +93,50 @@ const Build = () => {
             return buildSchema[item[0]].length ? (
               buildSchema[item[0]].map((product, key) => {
                 return (
-                  <div className="card filled" key={key}>
-                    <div className="header">
-                      <img src={product.img} alt="" />
+                  <>
+                    {["gpu", "ram", "monitor"].includes(item[0]) && key < 1 && (
+                      <div className="card" key={index}>
+                        <div className="content">
+                          <h3>{item[1]}</h3>
+                        </div>
+                        <div className="footer">
+                          <Button
+                            size="sm"
+                            onClick={() => history.push(`/build/${item[0]}`)}
+                          >
+                            Adicionar
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                    <div className="card filled" key={key}>
+                      <div className="header">
+                        <img src={product.img} alt="" />
+                      </div>
+                      <div className="body">
+                        <h3 id="category">{item[1]}</h3>
+                        <h3 id="model">{product.model}</h3>
+                        <h3 id="price">
+                          Preço:{" "}
+                          {product.price.toLocaleString("pt-BR", {
+                            style: "currency",
+                            currency: "BRL",
+                          })}
+                        </h3>
+                      </div>
+                      <div className="footer">
+                        <Button
+                          size="sm"
+                          variant="outlined"
+                          onClick={() =>
+                            removeFromBuild(product.productID, item[0])
+                          }
+                        >
+                          Remover
+                        </Button>
+                      </div>
                     </div>
-                    <div className="body">
-                      <h3 id="category">{item[1]}</h3>
-                      <h3 id="model">{product.model}</h3>
-                      <h3 id="price">
-                        Preço:{" "}
-                        {product.price.toLocaleString("pt-BR", {
-                          style: "currency",
-                          currency: "BRL",
-                        })}
-                      </h3>
-                    </div>
-                    <div className="footer">
-                      <Button
-                        size="sm"
-                        variant="outlined"
-                        onClick={() =>
-                          removeFromBuild(product.productID, item[0])
-                        }
-                      >
-                        Remover
-                      </Button>
-                    </div>
-                  </div>
+                  </>
                 );
               })
             ) : (
@@ -138,27 +155,6 @@ const Build = () => {
               </div>
             );
           })}
-
-          {/*
-
-        <div className="card filled">
-          <div className="header">
-            <img
-              src="https://static.meupc.net/produto/processador-amd-ryzen-5-3600-100100000031box-jXdm89-L.jpg"
-              alt=""
-            />
-          </div>
-          <div className="body">
-            <h3 id="category">Processador</h3>
-            <h3 id="model">AMD Ryzen 5 3600 3.6 GHz 6-Core </h3>
-            <h3 id="price">Preço: R$ 1.750,00</h3>
-          </div>
-          <div className="footer">
-            <Button size="sm" variant="outlined">
-              Remover
-            </Button>
-          </div>
-        </div> */}
         </ContainerMain>
         <ContainerFooter>
           <Button size="md" onClick={() => buildCheckout()}>
