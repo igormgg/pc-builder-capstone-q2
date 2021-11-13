@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../providers/auth";
 import { useEffect } from "react";
 import { useModal } from "../../providers/modal";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 
 const Cart = () => {
   const { isOpen, handleOpenModal } = useModal();
@@ -45,13 +45,13 @@ const Cart = () => {
   };
 
   const clearCart = () => {
-    for (let i = 1; i <= cart.length; i++) {
-      api.delete(`/cart/${i}`, {
+    cart.forEach((item) => {
+      api.delete(`/cart/${item.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-    }
+    });
     toast.success(`Todos os produtos foram removidos do carrinho.`);
   };
 

@@ -5,9 +5,14 @@ import api from "../../services/api.js";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import Header from "../../components/Header";
 import { useBuild } from "../../providers/build";
+import { useModal } from "../../providers/modal";
+import Modal from "../../components/Modal";
+import ModalDetails from "../../components/ModalDetails";
 
 const CategoryProducts = () => {
   const history = useHistory();
+
+  const { isOpen, handleOpenModal } = useModal()
 
   const { category } = useParams();
 
@@ -38,6 +43,7 @@ const CategoryProducts = () => {
   return (
     <>
       <Header buttonOut1="Login" buttonOut2="Registro" buttonIn1="Monte seu PC" buttonIn2="Logout" />
+      {isOpen && <Modal><ModalDetails /></Modal>}
       <Container>
         <div id="banner">
           <h3>PRODUTOS</h3>
@@ -60,15 +66,16 @@ const CategoryProducts = () => {
                 <div id="contentDiv">
                   <div id="info">
                     <h3>{element.model}</h3>
-                    <p>
+                    <p onClick={() => handleOpenModal(element)} >
                       Exibir detalhes <AiOutlinePlusCircle id="plusIcon" />
                     </p>
                     <h3>Preço: R$ {element.price.toFixed(2)}</h3>
                   </div>
                   <button
-                    onClick={() => (
-                      addToBuild(element, category), history.push("/build")
-                    )}
+                    onClick={() => {
+                      addToBuild(element, category)
+                      history.push("/build")
+                    }}
                   >
                     Adicionar
                   </button>
@@ -84,15 +91,16 @@ const CategoryProducts = () => {
                 <div id="contentDiv">
                   <div id="info">
                     <h3>{element.model}</h3>
-                    <p>
+                    <p onClick={() => handleOpenModal(element)} >
                       Exibir detalhes <AiOutlinePlusCircle id="plusIcon" />
                     </p>
                     <h3>Preço: {element.price.toFixed(2)}</h3>
                   </div>
                   <button
-                    onClick={() => (
-                      addToBuild(element, category), history.push("/build")
-                    )}
+                    onClick={() => {
+                      addToBuild(element, category)
+                      history.push("/build")
+                    }}
                   >
                     Adicionar
                   </button>
