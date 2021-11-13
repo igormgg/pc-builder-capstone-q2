@@ -13,35 +13,35 @@ export const AuthProvider = ({ children }) => {
   const history = useHistory();
 
   const signIn = (data) => {
+    const localStorageProducts = localStorage.getItem("build");
     api
       .post("/login/", data)
       .then((response) => {
-        localStorage.clear();
         localStorage.setItem(
           "userToken",
           JSON.stringify(response.data.accessToken)
         );
         localStorage.setItem("userID", JSON.stringify(response.data.user.id));
         setToken(response.data.accessToken);
-        history.push("/");
-        toast.success(`Bem vindo ${response.data.user.name}`);
+        localStorageProducts ? history.push("/build") : history.push("/");
+        toast.success(`Bem vindo ${response.data.user.name}!`);
       })
       .catch(() => toast.error("Ops, algo deu errado!"));
   };
 
   const signUp = (data) => {
+    const localStorageProducts = localStorage.getItem("build");
     api
       .post("/register/", data)
       .then((response) => {
-        localStorage.clear();
         localStorage.setItem(
           "userToken",
           JSON.stringify(response.data.accessToken)
         );
         localStorage.setItem("userID", JSON.stringify(response.data.user.id));
         setToken(response.data.accessToken);
-        history.push("/");
-        toast.success(`Bem vindo ${response.data.user.name}`);
+        localStorageProducts ? history.push("/build") : history.push("/");
+        toast.success(`Bem vindo ${response.data.user.name}!`);
       })
       .catch(() => toast.error("Ops, algo deu errado!"));
   };
