@@ -31,7 +31,10 @@ export const BuildProvider = ({ children }) => {
     for (let key in buildSchema) {
       buildSchema[key].map((item) => products.push(item));
     }
-    const totalValue = products.reduce((acc, item) => acc + item.price, 0);
+    const totalValue = products.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
     const totalWatts = products.reduce(
       (acc, item) => (item.psuWattage ? acc + Number(item.psuWattage) : acc),
       0
@@ -124,24 +127,45 @@ export const BuildProvider = ({ children }) => {
   console.log(checkErrors);
 
   const addToBuild = (product, category) => {
-    const newSet = {
-      ...buildSchema,
-      [category]: [...buildSchema[category], product],
-    };
-    setBuildSchema(newSet);
-    localStorage.setItem("build", JSON.stringify(newSet));
-  };
-
-  const removeFromBuild = (id, category) => {
-    const targetIndex = buildSchema[category].findIndex(
-      (item) => item.productID === id
+    const productIncluded = buildSchema[category].find(
+      (item) => item.productID === product.productID
     );
 
+    if (productIncluded) {
+      const newSet = {
+        ...buildSchema,
+        [category]: [
+          ...buildSchema[category].map((item) =>
+            item.productID === product.productID
+              ? { ...item, quantity: productIncluded.quantity + 1 }
+              : item
+          ),
+        ],
+      };
+      setBuildSchema(newSet);
+      localStorage.setItem("build", JSON.stringify(newSet));
+    } else {
+      const newSet = {
+        ...buildSchema,
+        [category]: [...buildSchema[category], { ...product, quantity: 1 }],
+      };
+      setBuildSchema(newSet);
+      localStorage.setItem("build", JSON.stringify(newSet));
+    }
+  };
+
+  console.log(buildSchema);
+
+  const removeFromBuild = (id, category) => {
+    const categoryUpdated = buildSchema[category]
+      .map((item) =>
+        item.productID === id ? { ...item, quantity: item.quantity - 1 } : item
+      )
+      .filter((item) => item.quantity > 0);
+
     const newSet = {
       ...buildSchema,
-      [category]: buildSchema[category].filter(
-        (_, index) => index !== targetIndex
-      ),
+      [category]: categoryUpdated,
     };
 
     setBuildSchema(newSet);

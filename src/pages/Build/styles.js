@@ -89,7 +89,7 @@ export const ContainerMain = styled.div`
   .card {
     width: 100%;
     max-width: 235px;
-    height: 340px;
+    min-height: 340px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -147,6 +147,7 @@ export const ContainerMain = styled.div`
         align-items: center;
         justify-content: space-between;
         padding: 10px 0;
+        gap: 5px;
 
         #model {
           text-align: center;

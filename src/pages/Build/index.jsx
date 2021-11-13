@@ -16,6 +16,7 @@ const Build = () => {
   const history = useHistory();
   const {
     buildSchema,
+    addToBuild,
     removeFromBuild,
     buildTotal,
     buildWatts,
@@ -100,6 +101,11 @@ const Build = () => {
                     <div className="body">
                       <h3 id="category">{item[1]}</h3>
                       <h3 id="model">{product.model}</h3>
+
+                      {["gpu", "peripherals", "ram", "drive"].includes(
+                        item[0]
+                      ) && <p>Qtd: {product.quantity} </p>}
+
                       <h3 id="price">
                         Preço:{" "}
                         {product.price.toLocaleString("pt-BR", {
@@ -109,24 +115,43 @@ const Build = () => {
                       </h3>
                     </div>
                     <div className="footer">
-                      <Button
-                        size="sm"
-                        variant="outlined"
-                        onClick={() =>
-                          removeFromBuild(product.productID, item[0])
-                        }
-                      >
-                        Remover
-                      </Button>
                       {["gpu", "ram", "peripherals", "drive"].includes(
                         item[0]
-                      ) && (
+                      ) ? (
+                        <>
+                          <Button
+                            size="us"
+                            variant="outlined"
+                            onClick={() =>
+                              removeFromBuild(product.productID, item[0])
+                            }
+                          >
+                            -
+                          </Button>
+                          <Button
+                            size="us"
+                            variant="outlined"
+                            onClick={() => addToBuild(product, item[0])}
+                          >
+                            +
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outlined"
+                            onClick={() => history.push(`/build/${item[0]}`)}
+                          >
+                            Mais Modelos
+                          </Button>
+                        </>
+                      ) : (
                         <Button
-                          size="us"
+                          size="sm"
                           variant="outlined"
-                          onClick={() => history.push(`/build/${item[0]}`)}
+                          onClick={() =>
+                            removeFromBuild(product.productID, item[0])
+                          }
                         >
-                          +
+                          Remover
                         </Button>
                       )}
                     </div>
