@@ -8,6 +8,7 @@ import { useBuild } from "../../providers/build";
 import { useModal } from "../../providers/modal";
 import Modal from "../../components/Modal";
 import ModalDetails from "../../components/ModalDetails";
+import { toast } from "react-toastify";
 
 const CategoryProducts = () => {
   const history = useHistory();
@@ -75,6 +76,7 @@ const CategoryProducts = () => {
                     onClick={() => {
                       addToBuild(element, category)
                       history.push("/build")
+                      toast.success(`${element.model} foi adicionado`)
                     }}
                   >
                     Adicionar
@@ -100,6 +102,8 @@ const CategoryProducts = () => {
                     onClick={() => {
                       addToBuild(element, category)
                       history.push("/build")
+                      const name = element.model.split(" ")
+                      toast.success(`${element.model} foi adicionado`)
                     }}
                   >
                     Adicionar
