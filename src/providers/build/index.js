@@ -36,7 +36,8 @@ export const BuildProvider = ({ children }) => {
       0
     );
     const totalWatts = products.reduce(
-      (acc, item) => (item.psuWattage ? acc + Number(item.psuWattage) : acc),
+      (acc, item) =>
+        item.psuWattage ? acc + Number(item.psuWattage) * item.quantity : acc,
       0
     );
 
@@ -53,8 +54,14 @@ export const BuildProvider = ({ children }) => {
   }, []);
 
   const checkCompatibility = () => {
-    // reset all props
+    // reset all msgs
     let errorMsgs = [];
+
+    // set products array - buildProducts doesn't work in this case
+    let products = [];
+    for (let key in buildSchema) {
+      buildSchema[key].map((item) => products.push(item));
+    }
 
     // variables used to check compatibility
     const cpuSocket = buildSchema["cpu"][0]?.socket.replace(/ /g, "") || "";
@@ -64,13 +71,29 @@ export const BuildProvider = ({ children }) => {
       buildSchema["motherboard"][0]?.socket.replace(/ /g, "") || "";
     const mbSlots = buildSchema["motherboard"][0]?.memory?.slots;
     const mbMax = buildSchema["motherboard"][0]?.memory?.max;
-    const ramTotal = buildSchema["ram"].reduce(
-      (acc, item) => acc + item.capacity,
+    const mbPcieSlots = buildSchema["motherboard"][0]?.pcie16 || 0;
+    const mbM2Slots = buildSchema["motherboard"][0]?.storage?.m2 || 0;
+    const mbSataSlots = buildSchema["motherboard"][0]?.storage?.sata || 0;
+    const psu = buildSchema["font"][0]?.power || 0;
+    const setupTotalWatts = products.reduce(
+      (acc, item) =>
+        item.psuWattage ? acc + Number(item.psuWattage) * item.quantity : acc,
       0
     );
-    const ramSlots = buildSchema["ram"].length;
+    const totalSelectedGpus = buildSchema["gpu"].reduce(
+      (acc, item) => acc + item.quantity,
+      0
+    );
+    const ramTotal = buildSchema["ram"].reduce(
+      (acc, item) => acc + item.capacity * item.quantity,
+      0
+    );
+    const ramSlots = buildSchema["ram"].reduce(
+      (acc, item) => acc + item.slots * item.quantity,
+      0
+    );
 
-    //check Mobo and CPU compatibility
+    //===== check Mobo and CPU compatibility =====
     if (cpuSocket && moboSocket && !moboSocket.includes(cpuSocket)) {
       errorMsgs.push(
         `Incompatibilidade com o Processador - Socket ${cpuSocket}`
@@ -80,22 +103,19 @@ export const BuildProvider = ({ children }) => {
       );
     }
 
-    //check if CPU includes integraded Graphics
+    //=====  check if CPU includes integraded Graphics =====
     if (cpuSocket && !integratedGraphics && !buildSchema.gpu.length) {
       errorMsgs.push("O processador atual requer uma placa de vídeo dedicada");
     }
 
-    //check if CPU includes a Cooler
+    //===== check if CPU includes a Cooler =====
     if (cpuSocket && !cpuCoolerBox && !buildSchema["cooler"].length) {
       errorMsgs.push(
         "O processador atual não acompanha um cooler - Requer adicição de um Cooler à parte"
       );
     }
 
-    console.log(cpuCoolerBox);
-
-    // Check Cooler compatibility
-
+    //=====  Check Cooler compatibility =====
     const cooler = buildSchema["cooler"][0]?.socketCompatibility || "";
     if (moboSocket && cooler && !cooler.includes(moboSocket)) {
       errorMsgs.push(
@@ -103,23 +123,56 @@ export const BuildProvider = ({ children }) => {
       );
     }
 
-    //check Ram and Mobo compatibility **needs to improve DB info
-
-    console.log(mbMax, ramTotal);
-    if (mbMax && ramTotal && ramTotal > mbMax) {
+    //===== check Ram and Mobo compatibility **needs to improve DB info =====
+    // console.log(mbMax, ramSlots, ramTotal);
+    if (moboSocket && mbMax && ramTotal && ramTotal > mbMax) {
       errorMsgs.push(
         `A quantidade de memória excede o limite da Placa Mãe - Quantidade: ${ramTotal} / ${mbMax}`
       );
-    } else if (ramSlots > mbSlots) {
+    }
+    if (moboSocket && ramSlots > mbSlots) {
       errorMsgs.push(
-        `A quantidade de memória excede a quantidade de slots da Placa Mãe - Quantidade: ${ramSlots}`
+        `A quantidade de pentes de memória (${ramSlots}) excedem a quantidade de slots da Placa Mãe (${mbSlots})`
       );
     }
-    // console.log("Ram slots and MB Slots", ramSlots, mbSlots);
 
-    // setCheckErrors(errorsStatus);
+    //===== Checks if Mobo supports the amount of selected GPUs
+    // console.log(mbPcieSlots, totalSelectedGpus);
+    if (moboSocket && mbPcieSlots < totalSelectedGpus) {
+      errorMsgs.push(
+        `A quantidade de placas de vídeo (${totalSelectedGpus}) excedem a quantidade de slots PCI-E da Placa Mãe (${mbPcieSlots})`
+      );
+    }
 
-    console.log(integratedGraphics);
+    //===== Checks if Mobo supports the amount and type of selected Storage Drives
+    console.log(mbSataSlots, mbM2Slots);
+    const totalOfSelectedM2Drives = buildSchema["drive"].reduce(
+      (acc, item) => (item.output === "M2" ? acc + item.quantity : acc),
+      0
+    );
+    const totalOfSelectedSataDrives = buildSchema["drive"].reduce(
+      (acc, item) => (item.output === "SATA" ? acc + item.quantity : acc),
+      0
+    );
+
+    if (moboSocket && totalOfSelectedM2Drives > mbM2Slots) {
+      errorMsgs.push(
+        `A quantidade de Drives de Armazenamento M2 escolhidos (${totalOfSelectedM2Drives}) excedem o limite da Placa Mãe (${mbM2Slots})`
+      );
+    }
+    if (moboSocket && totalOfSelectedSataDrives > mbSataSlots) {
+      errorMsgs.push(
+        `A quantidade de Drives de Armazenamento SATA escolhidos (${totalOfSelectedSataDrives}) excedem o limite da Placa Mãe (${mbSataSlots})`
+      );
+    }
+
+    //===== Checks if Power Suply is enough for the current setup
+    if (psu && setupTotalWatts > psu) {
+      errorMsgs.push(
+        `A fonte escolhida não fornece energia suficiente para o sistema atual: ( ${psu}W / ${setupTotalWatts}W )`
+      );
+    }
+
     setCheckErrors(errorMsgs);
   };
 
