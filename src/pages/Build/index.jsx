@@ -174,6 +174,19 @@ const Build = () => {
               </div>
             );
           })}
+          <div className="card">
+            <div className="content">
+              <h3>Periféricos</h3>
+            </div>
+            <div className="footer">
+              <Button
+                size="sm"
+                onClick={() => history.push(`/build/peripherals`)}
+              >
+                Adicionar
+              </Button>
+            </div>
+          </div>
         </ContainerMain>
         <ContainerFooter>
           <Button size="md" onClick={() => buildCheckout()}>
