@@ -296,6 +296,7 @@ export const BuildProvider = ({ children }) => {
         buildTotal,
         buildCheckout,
         checkErrors,
+        buildProducts,
       }}
     >
       {children}

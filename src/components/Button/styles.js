@@ -22,7 +22,6 @@ export const StyledButton = styled.button`
     props.size === "lg" && { width: "100%", maxWidth: "650px", height: "60px" }}
     ${(props) => props.size === "us" && { width: "80px", height: "40px" }}
 
-    
 
   :hover {
     ${(props) =>
@@ -34,4 +33,10 @@ export const StyledButton = styled.button`
       background-origin: border-box;
       background-clip: content-box, border-box;`}
   }
+
+  ${(props) =>
+    props.disabled && {
+      pointerEvents: "none",
+      background: "var(--gray2)",
+    }}
 `;

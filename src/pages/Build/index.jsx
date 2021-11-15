@@ -25,6 +25,7 @@ const Build = () => {
     buildWatts,
     buildCheckout,
     checkErrors,
+    buildProducts,
   } = useBuild();
   const { isOpen, handleOpenModal } = useModal();
 
@@ -205,7 +206,11 @@ const Build = () => {
           )}
         </ContainerMain>
         <ContainerFooter>
-          <Button size="md" onClick={() => buildCheckout()}>
+          <Button
+            size="md"
+            disabled={!buildProducts.length}
+            onClick={() => buildCheckout()}
+          >
             Finalizar montagem
           </Button>
         </ContainerFooter>
