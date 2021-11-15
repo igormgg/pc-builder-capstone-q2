@@ -11,9 +11,17 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  img {
-    width: 70px;
+  #LogoDiv {
+    display: flex;
+    gap: 10px;
 
+    h1 {
+      display: none;
+    }
+
+    img {
+      width: 70px;
+    }
     :hover {
       cursor: pointer;
       filter: brightness(0.8);
@@ -78,6 +86,12 @@ export const HeaderContainer = styled.div`
   }
 
   @media screen and (min-width: 769px) {
+    #LogoDiv {
+      h1 {
+        display: unset;
+      }
+    }
+
     #headerEnd {
       gap: 25px;
       flex-direction: row-reverse;

@@ -105,7 +105,10 @@ const Header = ({
 
   return (
     <HeaderContainer>
-      <img src={Logo} alt="Logo" onClick={() => history.push("/")} />
+      <div id="LogoDiv" onClick={() => history.push("/")}>
+        <img src={Logo} alt="Logo" />
+        <h1>PC Builder</h1>
+      </div>
       <div id="headerEnd">
         <div id="buttonsDiv">
           <button id="button1" onClick={handleClick1}>
@@ -115,7 +118,9 @@ const Header = ({
             {token ? buttonIn2 : buttonOut2}
           </button>
         </div>
-        {cart && <FaShoppingCart onClick={() => history.push("/cart")} />}
+        {token && cart && (
+          <FaShoppingCart onClick={() => history.push("/cart")} />
+        )}
       </div>
     </HeaderContainer>
   );
