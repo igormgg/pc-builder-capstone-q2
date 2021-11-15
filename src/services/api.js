@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://127.0.0.1:3001",
+  baseURL: "https://pc-builder-json-api.herokuapp.com",
 });
 
 export default api;

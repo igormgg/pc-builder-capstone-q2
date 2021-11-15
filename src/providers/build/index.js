@@ -111,7 +111,7 @@ export const BuildProvider = ({ children }) => {
     //===== check if CPU includes a Cooler =====
     if (cpuSocket && !cpuCoolerBox && !buildSchema["cooler"].length) {
       errorMsgs.push(
-        "O processador atual não acompanha um cooler - Requer adicição de um Cooler à parte"
+        "O processador atual não acompanha um Cooler - Requer adição de um Cooler à parte"
       );
     }
 
@@ -156,7 +156,7 @@ export const BuildProvider = ({ children }) => {
     }
 
     //===== Checks if Mobo supports the amount and type of selected Storage Drives
-    console.log(mbSataSlots, mbM2Slots);
+    // console.log(mbSataSlots, mbM2Slots);
     const totalOfSelectedM2Drives = buildSchema["drive"].reduce(
       (acc, item) => (item.output === "M2" ? acc + item.quantity : acc),
       0
@@ -188,7 +188,7 @@ export const BuildProvider = ({ children }) => {
   };
 
   // console.log(buildProducts);
-  console.log(checkErrors);
+  // console.log(checkErrors);
 
   const addToBuild = (product, category) => {
     const productIncluded = buildSchema[category].find(
@@ -218,7 +218,7 @@ export const BuildProvider = ({ children }) => {
     }
   };
 
-  console.log(buildSchema);
+  // console.log(buildSchema);
 
   const removeFromBuild = (id, category) => {
     const categoryUpdated = buildSchema[category]
@@ -236,17 +236,36 @@ export const BuildProvider = ({ children }) => {
     localStorage.setItem("build", JSON.stringify(newSet));
   };
 
+  // console.log(buildProducts);
+
   const buildCheckout = () => {
     const userId = localStorage.getItem("userID");
 
+    // Split quantity items into multiples of the same object
+    const cartStructure = [];
+
+    for (let key in buildProducts) {
+      for (let i = 1; i <= buildProducts[key].quantity; i++) {
+        cartStructure.push({ ...buildProducts[key], quantity: 1 });
+      }
+    }
+    // Remove the section above if the items aren't going to be split and replace cartStructure.map to buildProducts.map bellow
+
     if (token) {
-      buildProducts.map((item) => {
+      cartStructure.map((item) => {
         api.post(
           "/cart/",
           { ...item, userId: userId },
           { headers: { Authorization: `Bearer ${token}` } }
         );
       });
+      // buildProducts.map((item) => {
+      //   api.post(
+      //     "/cart/",
+      //     { ...item, userId: userId },
+      //     { headers: { Authorization: `Bearer ${token}` } }
+      //   );
+      // });
       toast.success("Produtos enviados ao carrinho");
       localStorage.removeItem("build");
       setBuildSchema({

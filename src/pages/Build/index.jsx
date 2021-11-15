@@ -74,9 +74,11 @@ const Build = () => {
               <div className="content fail">
                 <IoIosWarning></IoIosWarning>
                 <h3>Incompatibilidade detectada</h3>
-                {checkErrors.map((item) => {
-                  return <p key={item}>{item}</p>;
-                })}
+                <ul style={{ listStyle: "disc" }}>
+                  {checkErrors.map((item) => {
+                    return <li key={item}>{item}</li>;
+                  })}
+                </ul>
               </div>
             </div>
           )}
