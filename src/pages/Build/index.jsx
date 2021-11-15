@@ -7,7 +7,6 @@ import {
 } from "./styles";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { IoIosWarning } from "react-icons/io";
-import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import Header from "../../components/Header";
 import { useBuild } from "../../providers/build";

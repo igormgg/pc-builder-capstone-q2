@@ -252,14 +252,14 @@ export const BuildProvider = ({ children }) => {
     // Remove the section above if the items aren't going to be split and replace cartStructure.map to buildProducts.map bellow
 
     if (token) {
-      cartStructure.map((item) => {
+      cartStructure.forEach((item) => {
         api.post(
           "/cart/",
           { ...item, userId: userId },
           { headers: { Authorization: `Bearer ${token}` } }
         );
       });
-      // buildProducts.map((item) => {
+      // buildProducts.forEach((item) => {
       //   api.post(
       //     "/cart/",
       //     { ...item, userId: userId },
