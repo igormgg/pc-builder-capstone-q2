@@ -118,7 +118,9 @@ const Header = ({
             {token ? buttonIn2 : buttonOut2}
           </button>
         </div>
-        {cart && <FaShoppingCart onClick={() => history.push("/cart")} />}
+        {token && cart && (
+          <FaShoppingCart onClick={() => history.push("/cart")} />
+        )}
       </div>
     </HeaderContainer>
   );
