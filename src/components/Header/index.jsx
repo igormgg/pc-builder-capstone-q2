@@ -17,66 +17,88 @@ const Header = ({
 
   const handleClick1 = () => {
     if (token) {
-      if (buttonIn1 === "Login") {
-        history.push("/sign");
-      }
-      if (buttonIn1 === "Produtos") {
-        history.push("/");
-      }
-      if (buttonIn1 === "Registro") {
-        history.push("/sign");
-      }
-      if (buttonIn1 === "Monte seu PC") {
-        history.push("/build");
-      }
-      if (buttonIn1 === "Logout") {
-        signOut();
+      switch (buttonIn1) {
+        case "Produtos":
+          history.push("/");
+          break;
+        case "Login":
+          history.push("/sign");
+          break;
+        case "Registro":
+          history.push("/sign");
+          break;
+        case "Monte seu PC":
+          history.push("/build");
+          break;
+        case "Logout":
+          signOut();
+          break;
+        default:
+        // Do nothing
       }
     } else {
-      if (buttonOut1 === "Login") {
-        history.push("/sign");
-      }
-      if (buttonOut1 === "Produtos") {
-        history.push("/");
-      }
-      if (buttonOut1 === "Registro") {
-        history.push("/sign");
-      }
-      if (buttonOut1 === "Monte seu PC") {
-        history.push("/build");
+      switch (buttonOut1) {
+        case "Produtos":
+          history.push("/");
+          break;
+        case "Login":
+          history.push("/sign");
+          break;
+        case "Registro":
+          history.push("/sign");
+          break;
+        case "Monte seu PC":
+          history.push("/build");
+          break;
+        case "Logout":
+          signOut();
+          break;
+        default:
+        // Do nothing
       }
     }
   };
 
   const handleClick2 = () => {
     if (token) {
-      if (buttonIn2 === "Login") {
-        history.push("/sign");
-      }
-      if (buttonIn2 === "Produtos") {
-        history.push("/");
-      }
-      if (buttonIn2 === "Registro") {
-        history.push("/sign");
-      }
-      if (buttonIn2 === "Monte seu PC") {
-        history.push("/build");
-      }
-      if (buttonIn2 === "Logout") {
-        signOut();
+      switch (buttonIn2) {
+        case "Produtos":
+          history.push("/");
+          break;
+        case "Login":
+          history.push("/sign");
+          break;
+        case "Registro":
+          history.push("/sign");
+          break;
+        case "Monte seu PC":
+          history.push("/build");
+          break;
+        case "Logout":
+          signOut();
+          break;
+        default:
+        // Do nothing
       }
     } else {
-      if (buttonOut2 === "Login") {
-        history.push("/sign");
-      }
-      if (buttonOut2 === "Produtos") {
-        history.push("/");
-      }
-      if (buttonOut2 === "Registro") {
-        history.push("/sign");
-      }
-      if (buttonOut2 === "Monte seu PC") {
-        history.push("/build");
+      switch (buttonOut2) {
+        case "Produtos":
+          history.push("/");
+          break;
+        case "Login":
+          history.push("/sign");
+          break;
+        case "Registro":
+          history.push("/sign");
+          break;
+        case "Monte seu PC":
+          history.push("/build");
+          break;
+        case "Logout":
+          signOut();
+          break;
+        default:
+        // Do nothing
       }
     }
   };
