@@ -43,7 +43,7 @@ const CategoryProducts = () => {
 
   return (
     <>
-      <Header buttonOut1="Login" buttonOut2="Registro" buttonIn1="Monte seu PC" buttonIn2="Logout" />
+      <Header buttonOut1="Login" buttonOut2="Monte seu PC" buttonIn1="Monte seu PC" buttonIn2="Logout" />
       {isOpen && <Modal><ModalDetails /></Modal>}
       <Container>
         <div id="banner">
@@ -102,7 +102,6 @@ const CategoryProducts = () => {
                     onClick={() => {
                       addToBuild(element, category)
                       history.push("/build")
-                      const name = element.model.split(" ")
                       toast.success(`${element.model} foi adicionado`)
                     }}
                   >
@@ -113,7 +112,7 @@ const CategoryProducts = () => {
             ))
           ) : (
             <div id="empty">
-              <h3>Nenhum produto encontrado</h3>
+              <h3>Nenhum produto encontrado...</h3>
             </div>
           )}
         </div>
