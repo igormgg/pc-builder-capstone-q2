@@ -89,7 +89,7 @@ export const ContainerMain = styled.div`
   .card {
     width: 100%;
     max-width: 235px;
-    height: 340px;
+    min-height: 340px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -120,8 +120,9 @@ export const ContainerMain = styled.div`
 
     .footer {
       width: 100%;
-      display: grid;
-      place-items: center;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
       padding: 15px;
     }
 
@@ -146,6 +147,25 @@ export const ContainerMain = styled.div`
         align-items: center;
         justify-content: space-between;
         padding: 10px 0;
+        gap: 5px;
+
+        #details {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+          color: var(--gray2);
+          cursor: pointer;
+
+          :hover {
+            color: var(--gray1);
+          }
+        }
+
+        .fixed {
+          color: var(--gray3);
+          user-select: none;
+        }
 
         #model {
           text-align: center;
