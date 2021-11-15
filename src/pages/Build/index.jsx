@@ -11,6 +11,10 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import Header from "../../components/Header";
 import { useBuild } from "../../providers/build";
+import Modal from "../../components/Modal";
+import ModalDetails from "../../components/ModalDetails";
+import { useModal } from "../../providers/modal";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 const Build = () => {
   const history = useHistory();
@@ -23,6 +27,7 @@ const Build = () => {
     buildCheckout,
     checkErrors,
   } = useBuild();
+  const { isOpen, handleOpenModal } = useModal();
 
   const categorySchema = {
     cpu: "Processador",
@@ -44,6 +49,11 @@ const Build = () => {
         buttonOut1="Login"
         buttonOut2="Produtos"
       ></Header>
+      {isOpen && (
+        <Modal>
+          <ModalDetails />
+        </Modal>
+      )}
       <Container>
         <ContainerHeader>
           <div className="text">
@@ -103,10 +113,15 @@ const Build = () => {
                     <div className="body">
                       <h3 id="category">{item[1]}</h3>
                       <h3 id="model">{product.model}</h3>
+                      <p id="details" onClick={() => handleOpenModal(product)}>
+                        Exibir detalhes <AiOutlinePlusCircle />
+                      </p>
 
-                      {["gpu", "peripherals", "ram", "drive"].includes(
-                        item[0]
-                      ) && <p>Qtd: {product.quantity} </p>}
+                      {["gpu", "ram", "drive"].includes(item[0]) ? (
+                        <p className="changeable">Qtd: {product.quantity} </p>
+                      ) : (
+                        <p className="fixed">Qtd: {product.quantity} </p>
+                      )}
 
                       <h3 id="price">
                         Preço:{" "}
@@ -117,9 +132,7 @@ const Build = () => {
                       </h3>
                     </div>
                     <div className="footer">
-                      {["gpu", "ram", "peripherals", "drive"].includes(
-                        item[0]
-                      ) ? (
+                      {["gpu", "ram", "drive"].includes(item[0]) ? (
                         <>
                           <Button
                             size="us"

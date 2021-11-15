@@ -149,6 +149,24 @@ export const ContainerMain = styled.div`
         padding: 10px 0;
         gap: 5px;
 
+        #details {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+          color: var(--gray2);
+          cursor: pointer;
+
+          :hover {
+            color: var(--gray1);
+          }
+        }
+
+        .fixed {
+          color: var(--gray3);
+          user-select: none;
+        }
+
         #model {
           text-align: center;
         }
