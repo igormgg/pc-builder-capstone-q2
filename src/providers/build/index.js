@@ -105,7 +105,7 @@ export const BuildProvider = ({ children }) => {
 
     //=====  check if CPU includes integraded Graphics =====
     if (cpuSocket && !integratedGraphics && !buildSchema.gpu.length) {
-      errorMsgs.push("O processador atual requer uma placa de vídeo dedicada");
+      errorMsgs.push("O processador atual requer uma Placa de Vídeo dedicada");
     }
 
     //===== check if CPU includes a Cooler =====
@@ -140,7 +140,7 @@ export const BuildProvider = ({ children }) => {
     // console.log(mbPcieSlots, totalSelectedGpus);
     if (moboSocket && mbPcieSlots < totalSelectedGpus) {
       errorMsgs.push(
-        `A quantidade de placas de vídeo (${totalSelectedGpus}) excedem a quantidade de slots PCI-E da Placa Mãe (${mbPcieSlots})`
+        `A quantidade de Placas de Vídeo (${totalSelectedGpus}) excedem a quantidade de slots PCI-E da Placa Mãe (${mbPcieSlots})`
       );
     }
 
@@ -151,7 +151,7 @@ export const BuildProvider = ({ children }) => {
       buildSchema["gpu"].some((item) => item.productID !== firstSelectedGpu)
     ) {
       errorMsgs.push(
-        `Modelos diferentes de placa de vídeo não serão suportados para SLI ou recomendados para CrossFire`
+        `Modelos diferentes de placa de vídeo não serão suportados por SLI ou recomendados para CrossFire`
       );
     }
 
