@@ -144,6 +144,17 @@ export const BuildProvider = ({ children }) => {
       );
     }
 
+    //checks if different gpu models were selected
+    const firstSelectedGpu = buildSchema["gpu"][0]?.productID || 0;
+    if (
+      buildSchema["gpu"].length > 0 &&
+      buildSchema["gpu"].some((item) => item.productID !== firstSelectedGpu)
+    ) {
+      errorMsgs.push(
+        `Modelos diferentes de placa de vídeo não serão suportados para SLI ou recomendados para CrossFire`
+      );
+    }
+
     //===== Checks if Mobo supports the amount and type of selected Storage Drives
     console.log(mbSataSlots, mbM2Slots);
     const totalOfSelectedM2Drives = buildSchema["drive"].reduce(
