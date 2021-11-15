@@ -24,6 +24,7 @@ const CategoryProducts = () => {
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     api
       .get("/products")
       .then((response) => {
