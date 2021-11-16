@@ -29,13 +29,17 @@ export const ModalContactsContainer = styled.div`
 
     svg {
       align-self: flex-end;
-      margin: 10px 5% 10px 0;
+      margin: 5px 5% 0 0;
       font-size: 24px;
 
       :hover {
         cursor: pointer;
         filter: brightness(0.8);
       }
+    }
+
+    h1 {
+      margin-bottom: 5px;
     }
 
     #profileDiv {
@@ -109,6 +113,10 @@ export const ModalContactsContainer = styled.div`
 
       svg {
         margin-top: unset;
+        font-size: 36px;
+      }
+
+      h1 {
         font-size: 36px;
       }
 
