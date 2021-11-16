@@ -104,6 +104,10 @@ export const HeaderContainer = styled.div`
           height: 40px;
         }
       }
+
+      svg {
+        font-size: 32px;
+      }
     }
   }
 `;
