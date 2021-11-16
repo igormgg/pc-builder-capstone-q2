@@ -1,30 +1,54 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useState } from "react";
 
-export const ModalContext = createContext()
+export const ModalContext = createContext();
 
 export const ModalProvider = ({ children }) => {
-    const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
-    const [detailedProduct, setDetailedProduct] = useState({})
+  const [detailedProduct, setDetailedProduct] = useState({});
 
-    const handleCloseModal = (e) => {
-        if (e.target.id === "modalContainer" || e.target.tagName === "svg" || e.target.tagName === "path") {
-            setIsOpen(false)
-        }
+  const [contactsOpen, setContactsOpen] = useState(false);
+
+  const handleCloseModal = (e) => {
+    if (
+      e.target.id === "modalContainer" ||
+      e.target.tagName === "svg" ||
+      e.target.tagName === "path"
+    ) {
+      setIsOpen(false);
     }
+  };
 
-    const handleOpenModal = (item) => {
-        setIsOpen(true)
-        setDetailedProduct(item)
+  const handleOpenModal = (item) => {
+    setIsOpen(true);
+    setDetailedProduct(item);
+  };
+
+  const handleCloseContactsModal = (e) => {
+    if (
+      e.target.id === "ModalContactsContainer" ||
+      e.target.tagName === "svg" ||
+      e.target.tagName === "path"
+    ) {
+      setContactsOpen(false);
     }
+  };
 
-    return (
-        <ModalContext.Provider
-            value={{ isOpen, detailedProduct, handleOpenModal, handleCloseModal }}
-        >
-            {children}
-        </ModalContext.Provider>
-    )
-}
+  return (
+    <ModalContext.Provider
+      value={{
+        isOpen,
+        contactsOpen,
+        detailedProduct,
+        handleOpenModal,
+        handleCloseContactsModal,
+        handleCloseModal,
+        setContactsOpen,
+      }}
+    >
+      {children}
+    </ModalContext.Provider>
+  );
+};
 
-export const useModal = () => useContext(ModalContext)
+export const useModal = () => useContext(ModalContext);
