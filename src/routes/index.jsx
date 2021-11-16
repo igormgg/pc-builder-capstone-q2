@@ -2,6 +2,7 @@ import { Route, Switch, useHistory } from "react-router";
 import Build from "../pages/Build";
 import Cart from "../pages/Cart";
 import CategoryProducts from "../pages/CategoryProducts";
+import { Checkout } from "../pages/Checkout";
 import Products from "../pages/Products";
 import Sign from "../pages/Sign";
 
@@ -24,6 +25,9 @@ const Routes = () => {
       </Route>
       <Route exact path="/build/:category">
         <CategoryProducts />
+      </Route>
+      <Route exact path="/checkout">
+        <Checkout></Checkout>
       </Route>
       <Route>{() => history.push("/")}</Route>
     </Switch>
