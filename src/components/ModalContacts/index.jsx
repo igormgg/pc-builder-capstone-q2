@@ -1,12 +1,12 @@
-import linkedinImg from "../../assets/images/linkedin.png";
 import githubImg from "../../assets/images/git.png";
 import igorImg from "../../assets/images/profile_igor.png";
+import linkedinImg from "../../assets/images/linkedin.png";
 import nildoImg from "../../assets/images/profile_nildo.png";
 import rafaelImg from "../../assets/images/profile_rafael.png";
 import viniImg from "../../assets/images/profile_vinicius.png";
-import { useModal } from "../../providers/modal";
-import { ModalContactsContainer } from "./styles";
 import { IoClose } from "react-icons/io5";
+import { ModalContactsContainer } from "./styles";
+import { useModal } from "../../providers/modal";
 
 const ModalContacts = () => {
   const { handleCloseContactsModal } = useModal();
@@ -18,6 +18,7 @@ const ModalContacts = () => {
     >
       <div id="contactModal">
         <IoClose />
+        <h1>Desenvolvido por:</h1>
         <div id="profileDiv">
           <div className="devProfile">
             <img src={igorImg} alt="Igor" />
