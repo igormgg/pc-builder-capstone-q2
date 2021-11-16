@@ -100,7 +100,23 @@ const UserProvider = ({ children }) => {
       });
   };
 
-  const removeAddress = () => {};
+  const removeAddress = () => {
+    api
+      .patch(
+        `/users/${userId}`,
+        { address: {} },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((res) => {
+        toast.success("Endereço removido com sucesso");
+        setEnvironment();
+      })
+      .catch((err) => {
+        toast.error("Erro ao remover endereço");
+      });
+  };
 
   return (
     <userContext.Provider
@@ -114,6 +130,7 @@ const UserProvider = ({ children }) => {
         cepResults,
         cepError,
         addAddress,
+        removeAddress,
       }}
     >
       {children}
