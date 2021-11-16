@@ -4,68 +4,24 @@ import { useEffect } from "react/cjs/react.development";
 import { Button } from "../../components/Button";
 import Header from "../../components/Header";
 import { useAuth } from "../../providers/auth";
-import api from "../../services/api";
-import cep from "../../services/cep";
+import { useUserData } from "../../providers/userData";
 import { Container, ChildContainer, CheckoutContainer } from "./styles";
 
 export const Checkout = () => {
-  const [cepError, setCepError] = useState(false);
   const { token } = useAuth();
-  const userID = localStorage.getItem("userID") || "";
-  const [userInfo, setUserInfo] = useState([]);
-  //   if (!token) {
-  //     return <Redirect to="/sign" />;
-  //   }
+  const {
+    userAddress,
+    userCardInfo,
+    userInfo,
+    userId,
+    cepResults,
+    getAddress,
+    cepError,
+    addAddress,
+    setCepResults,
+  } = useUserData();
 
-  const [address, setAddress] = useState({
-    estado: "",
-    cidade: "",
-    logradouro: "",
-    number: "",
-  });
-
-  const getAddress = (number) => {
-    if (number.length >= 8) {
-      cep
-        .get(`/${number}`)
-        .then((res) => {
-          const data = res.data;
-          setAddress({
-            ...address,
-            estado: data.estado,
-            cidade: data.cidade,
-            logradouro: data.logradouro,
-          });
-          setCepError(false);
-        })
-        .catch((err) => setCepError(true));
-    } else {
-      setAddress({ ...address, estado: "", cidade: "", logradouro: "" });
-    }
-  };
-
-  useEffect(() => {
-    api
-      .get(`/users/${userID}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => setUserInfo(res.data));
-  }, []);
-
-  const sendAddress = (event) => {
-    event.preventDefault();
-    api
-      .patch(
-        `/users/${userID}`,
-        { address: address },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-      });
-  };
+  console.log(cepResults);
 
   return (
     <>
@@ -83,12 +39,24 @@ export const Checkout = () => {
           </div>
           <div className="section_body">
             <h3>Endereço de entrega</h3>
+
+            {/* <div className="address_info">
+              <div className="info_content">
+                <h3>Cidade:</h3>
+                <h3>Logradouro: , nº</h3>
+                <h3>Estado: </h3>
+                <h3>CEP: </h3>
+              </div>
+              <Button size="md" variant="outlined">
+                Remover
+              </Button>
+            </div> */}
             <form action="">
               <div>
                 <input
                   placeholder="CEP"
-                  onChange={(e) => getAddress(e.target.value)}
                   type="number"
+                  onChange={(e) => getAddress(e.target.value)}
                 />
                 {cepError && <span>CEP inválido</span>}
               </div>
@@ -97,7 +65,7 @@ export const Checkout = () => {
                   type="text"
                   placeholder="Estado"
                   disabled
-                  value={address.estado}
+                  value={cepResults?.estado || ""}
                 />
               </div>
               <div>
@@ -105,7 +73,7 @@ export const Checkout = () => {
                   type="text"
                   placeholder="Cidade"
                   disabled
-                  value={address.cidade}
+                  value={cepResults?.cidade || ""}
                 />
               </div>
               <div className="row_content">
@@ -113,14 +81,14 @@ export const Checkout = () => {
                   type="text"
                   placeholder="Logradouro"
                   disabled
-                  value={address.logradouro}
+                  value={cepResults?.logradouro || ""}
                 />
                 <input
                   type="text"
                   placeholder="Número"
                   type="number"
                   onChange={(e) =>
-                    setAddress({ ...address, number: e.target.value })
+                    setCepResults({ ...cepResults, numero: e.target.value })
                   }
                 />
               </div>
@@ -129,9 +97,9 @@ export const Checkout = () => {
                   size="md"
                   variant="outlined"
                   disabled={
-                    !Object.values(address).every((item) => item.length)
+                    !Object.values(cepResults).every((item) => item.length)
                   }
-                  onClick={sendAddress}
+                  onClick={addAddress}
                 >
                   Adicionar endereço
                 </Button>

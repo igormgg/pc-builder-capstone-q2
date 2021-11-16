@@ -41,6 +41,13 @@ export const ChildContainer = styled.div`
       margin: 20px 0;
     }
 
+    .address_info {
+      h3 {
+        font-size: 18px;
+        line-height: 12px;
+      }
+    }
+
     form {
       display: flex;
       flex-direction: column;
