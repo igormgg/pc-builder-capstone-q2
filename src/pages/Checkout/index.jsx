@@ -76,7 +76,7 @@ export const Checkout = () => {
   if (!token) {
     return <Redirect to="/sign" />;
   } else if (!checkoutAuth) {
-    return <Redirect to="/products" />;
+    return <Redirect to="/cart" />;
   }
 
   const onCardSubmit = (data) => {
@@ -114,7 +114,7 @@ export const Checkout = () => {
                 variant="outlined"
                 onClick={() => history.push("/produtos")}
               >
-                Voltar à produtos
+                Voltar aos produtos
               </Button>
             </div>
           </CheckoutConfirmation>
