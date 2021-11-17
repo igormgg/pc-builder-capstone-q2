@@ -7,9 +7,11 @@ import { Container, ChildContainer, CheckoutContainer } from "./styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useState } from "react/cjs/react.development";
 
 export const Checkout = () => {
   const { token } = useAuth();
+
   const {
     userAddress,
     userCardInfo,
@@ -22,6 +24,8 @@ export const Checkout = () => {
     addCard,
     removeCard,
   } = useUserData();
+
+  const [validateCardButton, setValidateCardButton] = useState(false);
 
   const schema = yup.object().shape({
     name: yup.string().required("Campo obrigatório. Ex: John Doe"),
@@ -143,6 +147,7 @@ export const Checkout = () => {
                     value={cepResults?.logradouro || ""}
                   />
                   <input
+                    id="address_number"
                     type="text"
                     placeholder="Número"
                     type="number"
@@ -193,7 +198,12 @@ export const Checkout = () => {
             ) : (
               <form onSubmit={handleSubmit(onCardSubmit)}>
                 <div>
-                  <input type="text" placeholder="Nome" {...register("name")} />
+                  <input
+                    type="text"
+                    placeholder="Nome"
+                    {...register("name")}
+                    onKeyDown={() => setValidateCardButton(true)}
+                  />
                   <span>{errors.name?.message}</span>
                 </div>
                 <div>
@@ -211,14 +221,19 @@ export const Checkout = () => {
                   </div>
                   <div>
                     <input
-                      placeholder="Código de segurança"
+                      placeholder="Cód. de segurança"
                       {...register("sn")}
                     />
                     <span>{errors.sn?.message}</span>
                   </div>
                 </div>
                 <div className="button_content">
-                  <Button type="submit" size="md" variant="outlined">
+                  <Button
+                    type="submit"
+                    size="md"
+                    variant="outlined"
+                    disabled={!validateCardButton}
+                  >
                     Adicionar Cartão
                   </Button>
                 </div>
