@@ -102,7 +102,7 @@ export const ChildContainer = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 450px;
-  min-width: 260px;
+  min-width: 240px;
 
   .flex_end {
     /* text-align: right; */
