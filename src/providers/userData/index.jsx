@@ -1,6 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { useEffect } from "react/cjs/react.development";
 import api from "../../services/api";
 import cep from "../../services/cep";
 import { useAuth } from "../auth";

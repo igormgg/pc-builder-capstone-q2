@@ -7,7 +7,7 @@ import { Container, ChildContainer, CheckoutContainer } from "./styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 
 export const Checkout = () => {
   const { token } = useAuth();
