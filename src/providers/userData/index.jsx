@@ -172,7 +172,6 @@ const UserProvider = ({ children }) => {
           setCart([]);
         });
     });
-    toast.success(`Todos os produtos foram removidos do carrinho.`);
   };
 
   return (

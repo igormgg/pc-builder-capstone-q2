@@ -14,9 +14,10 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { BsCheckLg } from "react-icons/bs";
+import { useEffect } from "react/cjs/react.development";
 
 export const Checkout = () => {
-  const { token, checkoutAuth } = useAuth();
+  const { token, checkoutAuth, setCheckoutAuth } = useAuth();
   const history = useHistory();
 
   const {
@@ -65,6 +66,12 @@ export const Checkout = () => {
     reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
+  useEffect(() => {
+    return () => {
+      setCheckoutAuth(false);
+    };
+  }, []);
 
   if (!token) {
     return <Redirect to="/sign" />;
