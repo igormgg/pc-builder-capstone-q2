@@ -7,7 +7,7 @@ import { Container, ChildContainer, CheckoutContainer } from "./styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react/cjs/react.development";
+import { useState } from "react/cjs/react.development";
 
 export const Checkout = () => {
   const { token } = useAuth();
@@ -148,7 +148,6 @@ export const Checkout = () => {
                   />
                   <input
                     id="address_number"
-                    type="text"
                     placeholder="Número"
                     type="number"
                     onChange={(e) =>

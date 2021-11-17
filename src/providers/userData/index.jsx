@@ -119,7 +119,6 @@ const UserProvider = ({ children }) => {
   };
 
   const addCard = (data) => {
-    console.log(data);
     api
       .patch(
         `/users/${userId}`,
