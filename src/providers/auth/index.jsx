@@ -10,6 +10,8 @@ export const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("userToken")) || ""
   );
 
+  const [checkoutAuth, setCheckoutAuth] = useState(false);
+
   const history = useHistory();
 
   const signIn = (data) => {
@@ -53,7 +55,17 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token, setToken, signIn, signUp, signOut }}>
+    <AuthContext.Provider
+      value={{
+        checkoutAuth,
+        setCheckoutAuth,
+        setToken,
+        signIn,
+        signUp,
+        signOut,
+        token,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
