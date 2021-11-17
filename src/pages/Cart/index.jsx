@@ -17,7 +17,7 @@ const Cart = () => {
 
   const [cart, setCart] = useState([]);
 
-  const { token } = useAuth();
+  const { setCheckoutAuth, token } = useAuth();
 
   const history = useHistory();
 
@@ -55,6 +55,11 @@ const Cart = () => {
       });
     });
     toast.success(`Todos os produtos foram removidos do carrinho.`);
+  };
+
+  const checkoutClickHandler = () => {
+    setCheckoutAuth(true);
+    history.push("/checkout");
   };
 
   if (!token) {
@@ -113,7 +118,9 @@ const Cart = () => {
                 R$ {cart.reduce((acc, item) => acc + item.price, 0).toFixed(2)}
               </h2>
             </div>
-            <button id="checkoutButton">Finalizar pedido</button>
+            <button id="checkoutButton" onClick={checkoutClickHandler}>
+              Checkout
+            </button>
           </>
         )}
       </CartContainer>
