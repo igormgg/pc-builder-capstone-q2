@@ -6,7 +6,8 @@ export const Container = styled.div`
   flex-wrap: wrap;
   padding-bottom: 20px;
   min-height: calc(100vh - 60px);
-  gap: 20px;
+  column-gap: 20px;
+  row-gap: 40px;
 `;
 
 export const ChildContainer = styled.div`
@@ -58,7 +59,6 @@ export const ChildContainer = styled.div`
     .address_info {
       h3 {
         font-size: 18px;
-        line-height: 12px;
       }
     }
 
@@ -127,6 +127,11 @@ export const CheckoutContainer = styled.div`
   width: 100%;
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  select {
+    margin-bottom: 40px;
+  }
 `;
