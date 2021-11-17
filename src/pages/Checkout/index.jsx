@@ -1,4 +1,4 @@
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
 import { Button } from "../../components/Button";
 import Header from "../../components/Header";
 import { useAuth } from "../../providers/auth";
@@ -109,7 +109,7 @@ export const Checkout = () => {
                 variant="outlined"
                 onClick={() => history.push("/produtos")}
               >
-                Voltar à produtos
+                Voltar aos produtos
               </Button>
             </div>
           </CheckoutConfirmation>
