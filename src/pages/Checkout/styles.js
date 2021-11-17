@@ -8,6 +8,7 @@ export const Container = styled.div`
   min-height: calc(100vh - 60px);
   column-gap: 20px;
   row-gap: 40px;
+  overflow: hidden;
 `;
 
 export const CheckoutConfirmation = styled.div`
@@ -33,7 +34,7 @@ export const CheckoutConfirmation = styled.div`
     height: 80px;
     border-radius: 50%;
     font-size: 30px;
-    animation: icon_anim 1s 1 linear;
+    animation: icon_anim 0.6s 1 linear;
 
     @keyframes icon_anim {
       0% {
@@ -58,7 +59,7 @@ export const CheckoutConfirmation = styled.div`
     }
 
     svg {
-      animation: fade_in 1.8s 1 ease-in-out;
+      animation: fade_in 1.2s 1 ease-in-out;
 
       @keyframes fade_in {
         0% {
@@ -80,6 +81,18 @@ export const CheckoutConfirmation = styled.div`
     h3 {
       font-size: calc(16px + 10 * ((100vw - 320px) / 680));
       text-align: center;
+    }
+
+    animation: text_anim 1s 1 ease-in-out;
+
+    @keyframes text_anim {
+      0% {
+        opacity: 0;
+      }
+      70% {
+        transform: translateY(-30px);
+        opacity: 0;
+      }
     }
   }
 `;

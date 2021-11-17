@@ -25,10 +25,11 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     if (token) {
       setEnvironment();
+      getCartItems();
     }
-  }, [token]);
+  }, [token, cart]);
 
-  useEffect(() => {
+  const getCartItems = () => {
     api
       .get(`/cart?userId=${userId}`, {
         headers: {
@@ -39,7 +40,7 @@ const UserProvider = ({ children }) => {
         setCart(response.data);
       })
       .catch((err) => console.log(err));
-  }, [cart]);
+  };
 
   const setEnvironment = () => {
     setUserId(localStorage.getItem("userID"));
