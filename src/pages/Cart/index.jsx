@@ -103,7 +103,7 @@ const Cart = () => {
                       <p onClick={() => handleOpenModal(item)}>
                         Exibir detalhes <AiOutlinePlusCircle />
                       </p>
-                      <span>R$ {item.price.toFixed(2)}</span>
+                      <span>{(item.price).toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}</span>
                     </div>
                   </div>
                   <div id="trashDiv">
@@ -115,7 +115,7 @@ const Cart = () => {
             <div id="bottomContainer">
               <h2>Total:</h2>
               <h2>
-                R$ {cart.reduce((acc, item) => acc + item.price, 0).toFixed(2)}
+                {cart.reduce((acc, item) => acc + item.price, 0).toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}
               </h2>
             </div>
             <button id="checkoutButton" onClick={checkoutClickHandler}>
