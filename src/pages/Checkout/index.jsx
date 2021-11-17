@@ -3,11 +3,17 @@ import { Button } from "../../components/Button";
 import Header from "../../components/Header";
 import { useAuth } from "../../providers/auth";
 import { useUserData } from "../../providers/userData";
-import { Container, ChildContainer, CheckoutContainer } from "./styles";
+import {
+  Container,
+  ChildContainer,
+  CheckoutContainer,
+  CheckoutConfirmation,
+} from "./styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
+import { BsCheckLg } from "react-icons/bs";
 
 export const Checkout = () => {
   const { token } = useAuth();
@@ -82,7 +88,20 @@ export const Checkout = () => {
         buttonOut2="Produtos"
       ></Header>
       <Container>
-        <ChildContainer>
+        <CheckoutConfirmation>
+          <div className="confirmation_container">
+            <div className="icon_content">
+              <BsCheckLg />
+            </div>
+            <div className="confirmation_content">
+              <h3>Pedido finalizado com sucesso!</h3>
+            </div>
+            <Button size="md" variant="outlined">
+              Voltar à produtos
+            </Button>
+          </div>
+        </CheckoutConfirmation>
+        {/* <ChildContainer>
           <div className="section_header">
             <h3>Kenzinho</h3>
             <h4>kenzinho@mail.com</h4>
@@ -239,8 +258,8 @@ export const Checkout = () => {
               </form>
             )}
           </div>
-        </ChildContainer>
-        <CheckoutContainer>
+        </ChildContainer> */}
+        {/* <CheckoutContainer>
           <Button
             size="lg"
             disabled={
@@ -252,7 +271,7 @@ export const Checkout = () => {
           >
             Finalizar pedido
           </Button>
-        </CheckoutContainer>
+        </CheckoutContainer> */}
       </Container>
     </>
   );
