@@ -97,7 +97,7 @@ const CategoryProducts = () => {
                     <p onClick={() => handleOpenModal(element)} >
                       Exibir detalhes <AiOutlinePlusCircle id="plusIcon" />
                     </p>
-                    <h3>Preço: {element.price.toFixed(2)}</h3>
+                    <h3>Preço: R$ {element.price.toFixed(2)}</h3>
                   </div>
                   <button
                     onClick={() => {
