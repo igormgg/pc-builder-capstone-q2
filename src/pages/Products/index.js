@@ -64,7 +64,7 @@ const Products = () => {
     if (token) {
       api.post(
         "/cart/",
-        { item, userId: userId },
+        { ...item, userId: userId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success(`${item.model} foi adicionado ao carrinho!`);
