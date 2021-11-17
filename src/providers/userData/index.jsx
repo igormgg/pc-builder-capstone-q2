@@ -20,12 +20,26 @@ const UserProvider = ({ children }) => {
     numero: "",
   });
   const [cepError, setCepError] = useState(false);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     if (token) {
       setEnvironment();
     }
   }, [token]);
+
+  useEffect(() => {
+    api
+      .get(`/cart?userId=${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setCart(response.data);
+      })
+      .catch((err) => console.log(err));
+  }, [cart]);
 
   const setEnvironment = () => {
     setUserId(localStorage.getItem("userID"));
@@ -145,6 +159,21 @@ const UserProvider = ({ children }) => {
       .catch((err) => "Erro ao remover cartão");
   };
 
+  const clearCart = () => {
+    cart.forEach((item) => {
+      api
+        .delete(`/cart/${item.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setCart([]);
+        });
+    });
+    toast.success(`Todos os produtos foram removidos do carrinho.`);
+  };
+
   return (
     <userContext.Provider
       value={{
@@ -160,6 +189,8 @@ const UserProvider = ({ children }) => {
         removeAddress,
         addCard,
         removeCard,
+        clearCart,
+        cart,
       }}
     >
       {children}
