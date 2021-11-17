@@ -14,11 +14,12 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { BsCheckLg } from "react-icons/bs";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect } from "react";
 
 export const Checkout = () => {
-  const { token, checkoutAuth, setCheckoutAuth } = useAuth();
   const history = useHistory();
+
+  const { checkoutAuth } = useAuth();
 
   const {
     userAddress,
@@ -67,18 +68,6 @@ export const Checkout = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  useEffect(() => {
-    return () => {
-      setCheckoutAuth(false);
-    };
-  }, []);
-
-  if (!token) {
-    return <Redirect to="/sign" />;
-  } else if (!checkoutAuth) {
-    return <Redirect to="/cart" />;
-  }
-
   const onCardSubmit = (data) => {
     addCard({
       ...data,
@@ -90,6 +79,12 @@ export const Checkout = () => {
     });
     reset();
   };
+
+  useEffect(() => {
+    if (!cart.length || !checkoutAuth) {
+      history.push("/cart");
+    }
+  }, []);
 
   return (
     <>
@@ -114,7 +109,7 @@ export const Checkout = () => {
                 variant="outlined"
                 onClick={() => history.push("/produtos")}
               >
-                Voltar aos produtos
+                Voltar à produtos
               </Button>
             </div>
           </CheckoutConfirmation>
