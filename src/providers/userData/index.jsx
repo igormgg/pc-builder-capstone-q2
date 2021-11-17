@@ -9,7 +9,7 @@ const userContext = createContext({});
 
 const UserProvider = ({ children }) => {
   const [userAddress, setUserAddress] = useState({});
-  const [userCardInfo, setCardInfo] = useState({});
+  const [userCardInfo, setUserCardInfo] = useState({});
   const [userInfo, setUserInfo] = useState({});
   const [userId, setUserId] = useState(localStorage.getItem("userID") || "");
   const { token } = useAuth();
@@ -39,7 +39,7 @@ const UserProvider = ({ children }) => {
         const cardData = res.data.card || {};
         const userData = res.data || {};
         setUserAddress(addressData);
-        setCardInfo(cardData);
+        setUserCardInfo(cardData);
         setUserInfo(userData);
       });
   };
@@ -118,6 +118,35 @@ const UserProvider = ({ children }) => {
       });
   };
 
+  const addCard = (data) => {
+    console.log(data);
+    api
+      .patch(
+        `/users/${userId}`,
+        { card: data },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((res) => {
+        toast.success("Cartão adicionado com sucesso");
+        setEnvironment();
+      })
+      .catch((err) => "Erro ao adicionar cartão");
+  };
+
+  const removeCard = () => {
+    api
+      .patch(
+        `/users/${userId}`,
+        { card: {} },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((res) => {
+        toast.success("Cartão removido com sucesso");
+        setEnvironment();
+      })
+      .catch((err) => "Erro ao remover cartão");
+  };
+
   return (
     <userContext.Provider
       value={{
@@ -131,6 +160,8 @@ const UserProvider = ({ children }) => {
         cepError,
         addAddress,
         removeAddress,
+        addCard,
+        removeCard,
       }}
     >
       {children}

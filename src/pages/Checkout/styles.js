@@ -5,6 +5,8 @@ export const Container = styled.div`
   justify-content: space-around;
   flex-wrap: wrap;
   padding-bottom: 20px;
+  min-height: calc(100vh - 60px);
+  gap: 20px;
 `;
 
 export const ChildContainer = styled.div`
@@ -15,7 +17,7 @@ export const ChildContainer = styled.div`
   min-width: 260px;
 
   .flex_end {
-    text-align: right;
+    /* text-align: right; */
   }
 
   .section_header {
@@ -38,7 +40,19 @@ export const ChildContainer = styled.div`
   .section_body {
     h3 {
       font-size: 36px;
-      margin: 20px 0;
+    }
+    .address_info {
+      .info_content {
+        padding: 20px 0;
+        h3 {
+          font-size: 18px;
+          padding: 8px 0;
+          color: var(--gray2);
+          span {
+            color: white;
+          }
+        }
+      }
     }
 
     .address_info {
@@ -72,7 +86,7 @@ export const ChildContainer = styled.div`
           }
 
           &::placeholder {
-            font-size: 25px;
+            font-size: 20px;
             color: var(--gray2);
           }
 
@@ -86,6 +100,12 @@ export const ChildContainer = styled.div`
       .row_content {
         display: flex;
         gap: 10px;
+
+        &.card {
+          div:last-child {
+            max-width: 200px;
+          }
+        }
       }
 
       .button_content {
