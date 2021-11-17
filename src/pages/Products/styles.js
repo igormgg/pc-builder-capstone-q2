@@ -18,7 +18,7 @@ export const Container = styled.div`
     height: 180px;
 
     button {
-      width: 150px;
+      width: 120px;
       height: 50px;
       background: var(--gradient-1);
       border: none;
