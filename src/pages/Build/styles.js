@@ -96,6 +96,13 @@ export const ContainerMain = styled.div`
     align-items: center;
     justify-content: center;
     border: 2px solid var(--gray2);
+    animation: fade_in_card 0.5s 1 ease-in-out;
+    @keyframes fade_in_card {
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+    }
 
     :hover {
       color: var(--gray1);
@@ -127,12 +134,20 @@ export const ContainerMain = styled.div`
     }
 
     &.filled {
+      animation: card_filled_fade_in 0.5s 1 ease-in-out;
+      @keyframes card_filled_fade_in {
+        from {
+          opacity: 0;
+          transform: translateX(10px);
+        }
+      }
       .header {
         width: 100%;
         height: 145px;
         background: #fff;
         display: grid;
         place-items: center;
+
         img {
           width: 130px;
           height: 130px;
@@ -193,4 +208,8 @@ export const ContainerFooter = styled.div`
   padding: 20px 0;
   display: flex;
   justify-content: flex-end;
+
+  @media screen and (max-width: 600px) {
+    justify-content: center;
+  }
 `;

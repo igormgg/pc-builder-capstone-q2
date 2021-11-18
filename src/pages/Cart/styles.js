@@ -43,6 +43,11 @@ export const CartContainer = styled.div`
       }
     }
   }
+
+  #noProductsTitle {
+    animation: showUp 0.4s 1 ease-in-out 0.5s both;
+  }
+
   #backToShopping {
     width: 250px;
     height: 50px;
@@ -54,6 +59,7 @@ export const CartContainer = styled.div`
     margin-top: 20px;
     font-size: 16px;
     font-weight: 600;
+    animation: showUp 0.4s 1 ease-in-out 0.5s both;
 
     :hover {
       color: var(--gray1);
@@ -73,6 +79,7 @@ export const CartContainer = styled.div`
     flex-direction: column;
     gap: 10px;
     overflow-y: auto;
+    animation: scaleDown 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) 0.2s both;
 
     li {
       width: 100%;
@@ -119,10 +126,10 @@ export const CartContainer = styled.div`
           p {
             font-size: 10px;
             color: var(--gray2);
-
             display: flex;
             align-items: center;
             gap: 5px;
+            line-height: 0.9;
 
             svg {
               font-size: 14px;
@@ -174,6 +181,7 @@ export const CartContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    animation: showUp 0.4s 1 ease-in-out 0.4s both;
 
     h2 {
       color: var(--gray1);
@@ -192,6 +200,7 @@ export const CartContainer = styled.div`
     margin-top: 20px;
     font-size: 16px;
     font-weight: 600;
+    animation: showUp 0.4s 1 ease-in-out 0.5s both;
 
     :hover {
       color: var(--gray1);
@@ -278,6 +287,23 @@ export const CartContainer = styled.div`
       width: 650px;
       height: 60px;
       font-size: 18px;
+    }
+  }
+
+  @keyframes scaleDown {
+    0% {
+      transform: scaleY(0);
+      transform-origin: 100% 0%;
+    }
+    100% {
+      transform: scaleY(1);
+      transform-origin: 100% 0%;
+    }
+  }
+
+  @keyframes showUp {
+    from {
+      opacity: 0;
     }
   }
 `;

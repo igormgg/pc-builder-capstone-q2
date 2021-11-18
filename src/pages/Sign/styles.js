@@ -8,6 +8,7 @@ const SignContainer = styled.div`
   align-items: center;
   background-repeat: no-repeat;
   background-size: contain;
+  overflow-x: hidden;
 
   form {
     width: 100%;
@@ -59,6 +60,7 @@ const SignContainer = styled.div`
 
   #loginForm {
     padding: 10px 0 4vh 0;
+    animation: left_cont 0.5s 1 ease-in-out;
 
     button {
       color: var(--gray1);
@@ -79,6 +81,7 @@ const SignContainer = styled.div`
     padding-top: 3vh;
     border-top: 2px solid var(--gray2);
     margin-bottom: 30px;
+    animation: right_cont 0.5s 1 ease-in-out;
 
     button {
       color: var(--gray1);
@@ -135,6 +138,20 @@ const SignContainer = styled.div`
       border-left: 2px solid var(--gray2);
       padding: 10px 0 20px 16px;
       margin-bottom: unset;
+    }
+  }
+
+  @keyframes left_cont {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+  }
+
+  @keyframes right_cont {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
     }
   }
 `;

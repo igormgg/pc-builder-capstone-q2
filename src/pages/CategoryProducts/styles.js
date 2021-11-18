@@ -166,7 +166,7 @@ h3 {
                 justify-content: space-between;
     
                 #info {
-                    width: 300px;
+                    width: 345px;
                     align-items: flex-start;
                     margin-left: 30px;
                     
