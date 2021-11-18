@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    min-height: calc(100vh - 60px);
+min-height: calc(100vh - 60px);
 
 #banner {
 min-width: 288px;
@@ -13,9 +13,9 @@ place-items: center;
 margin: 20px auto;
 color: var(--gray4);
 
-h3 {
-    font-size: 36px;
-}
+    h3 {
+        font-size: 36px;
+    }
 }
 
 #searchInput {
@@ -41,6 +41,12 @@ h3 {
 #products {
     margin: 20px auto;
     border-top: 2px solid var(--gray2);
+    > :nth-child(even){
+            animation: card_anim .6s 1 ease-in-out;
+        }
+    > :nth-child(odd){
+        animation: card_anim .5s 1 ease-in-out;
+    }
     
     #card {
         border: 2px solid var(--gray3);
@@ -136,6 +142,7 @@ h3 {
         height: 250px;
         display: grid;
         place-items: center;
+        animation: showUp 0.6s 1 ease-in-out 0.5s both;;
     }
 }
 
@@ -152,14 +159,6 @@ h3 {
             width: 100%;
             flex-direction: row;
     
-            #imageDiv {
-                
-    
-                img {
-                    
-                }
-            }
-    
             #contentDiv {
                 flex-direction: row;
                 width: 70%;
@@ -173,16 +172,26 @@ h3 {
                     h3:first-child {
                         text-align: left;
                     }
-        
-                    p {
-                        
-                        #plusIcon {
-                            
-                        }
-                    }
                 }
             }
         }
+    }
+}
+
+@keyframes card_anim {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes showUp {
+    from {
+      opacity: 0;
     }
 }
 
