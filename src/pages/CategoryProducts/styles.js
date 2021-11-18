@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    min-height: calc(100vh - 60px);
+min-height: calc(100vh - 60px);
 
 #banner {
 min-width: 288px;
@@ -13,9 +13,9 @@ place-items: center;
 margin: 20px auto;
 color: var(--gray4);
 
-h3 {
-    font-size: 36px;
-}
+    h3 {
+        font-size: 36px;
+    }
 }
 
 #searchInput {
@@ -159,14 +159,6 @@ h3 {
             width: 100%;
             flex-direction: row;
     
-            #imageDiv {
-                
-    
-                img {
-                    
-                }
-            }
-    
             #contentDiv {
                 flex-direction: row;
                 width: 70%;
@@ -180,13 +172,6 @@ h3 {
                     h3:first-child {
                         text-align: left;
                     }
-        
-                    p {
-                        
-                        #plusIcon {
-                            
-                        }
-                    }
                 }
             }
         }
@@ -196,7 +181,7 @@ h3 {
 @keyframes card_anim {
     0% {
         opacity: 0;
-        transform: scale(0.5);
+        transform: scale(0.9);
     }
     70% {
         opacity: 1;
