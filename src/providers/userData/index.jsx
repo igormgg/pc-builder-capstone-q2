@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import api from "../../services/api";
 import cep from "../../services/cep";
 import { useAuth } from "../auth";
+import { useCart } from "../../providers/cart";
 
 const userContext = createContext({});
 
@@ -20,29 +21,15 @@ const UserProvider = ({ children }) => {
     numero: "",
   });
   const [cepError, setCepError] = useState(false);
-  const [cart, setCart] = useState([]);
+  const { cart, setCart } = useCart();
   const [endCheckout, setEndCheckout] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (token) {
       setEnvironment();
-      getCartItems();
     }
-  }, [token, checkoutAuth, setCheckoutAuth]);
-
-  const getCartItems = () => {
-    api
-      .get(`/cart?userId=${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        setCart(response.data);
-      })
-      .catch((err) => console.log(err));
-  };
+  }, [token, checkoutAuth, setCheckoutAuth, cart]);
 
   const setEnvironment = () => {
     setUserId(localStorage.getItem("userID"));
@@ -175,6 +162,7 @@ const UserProvider = ({ children }) => {
     ).then(() => {
       setEndCheckout(true);
       setIsLoading(false);
+      setCart([]);
     });
   };
 

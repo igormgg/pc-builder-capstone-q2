@@ -37,7 +37,6 @@ export const Checkout = () => {
     endCheckout,
     setEndCheckout,
     isLoading,
-    setIsLoading,
   } = useUserData();
 
   const [validateCardButton, setValidateCardButton] = useState(false);
@@ -312,7 +311,7 @@ export const Checkout = () => {
                 )
               }
               onClick={clearCart}
-              loading={isLoading}
+              isLoading={isLoading}
             >
               Finalizar pedido
             </Button>

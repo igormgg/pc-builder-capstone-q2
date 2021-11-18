@@ -5,14 +5,14 @@ export const Button = ({
   variant,
   size,
   disabled = false,
-  loading = false,
+  isLoading = false,
   ...rest
 }) => {
   return (
     <StyledButton
       variant={variant}
       disabled={disabled}
-      loading={loading}
+      isLoading={isLoading}
       size={size}
       {...rest}
     >
