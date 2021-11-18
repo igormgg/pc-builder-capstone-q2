@@ -79,7 +79,7 @@ export const CartContainer = styled.div`
     flex-direction: column;
     gap: 10px;
     overflow-y: auto;
-    animation: scaleDown 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.2s both;
+    animation: scaleDown 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) 0.2s both;
 
     li {
       width: 100%;
@@ -126,10 +126,10 @@ export const CartContainer = styled.div`
           p {
             font-size: 10px;
             color: var(--gray2);
-
             display: flex;
             align-items: center;
             gap: 5px;
+            line-height: 0.9;
 
             svg {
               font-size: 14px;
@@ -291,15 +291,15 @@ export const CartContainer = styled.div`
   }
 
   @keyframes scaleDown {
-  0% {
-            transform: scaleY(0);
-            transform-origin: 100% 0%;
+    0% {
+      transform: scaleY(0);
+      transform-origin: 100% 0%;
+    }
+    100% {
+      transform: scaleY(1);
+      transform-origin: 100% 0%;
+    }
   }
-  100% {
-            transform: scaleY(1);
-            transform-origin: 100% 0%;
-  }
-}
 
   @keyframes showUp {
     from {
