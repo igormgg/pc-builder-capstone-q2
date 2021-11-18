@@ -8,6 +8,7 @@ const SignContainer = styled.div`
   align-items: center;
   background-repeat: no-repeat;
   background-size: contain;
+  overflow-x: hidden;
 
   form {
     width: 100%;
