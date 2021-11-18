@@ -26,6 +26,7 @@ const Build = () => {
     buildCheckout,
     checkErrors,
     buildProducts,
+    isLoading,
   } = useBuild();
   const { isOpen, handleOpenModal } = useModal();
 
@@ -210,6 +211,7 @@ const Build = () => {
             size="md"
             disabled={!buildProducts.length}
             onClick={() => buildCheckout()}
+            isLoading={isLoading}
           >
             Finalizar montagem
           </Button>

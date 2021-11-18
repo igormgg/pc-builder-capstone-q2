@@ -24,6 +24,7 @@ export const BuildProvider = ({ children }) => {
   const { token } = useAuth();
   const history = useHistory();
   const [checkErrors, setCheckErrors] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     let products = [];
@@ -238,6 +239,7 @@ export const BuildProvider = ({ children }) => {
   // console.log(buildProducts);
 
   const buildCheckout = async () => {
+    setIsLoading(true);
     const userId = localStorage.getItem("userID");
 
     // Split quantity items into multiples of the same object
@@ -274,15 +276,18 @@ export const BuildProvider = ({ children }) => {
             peripherals: [],
           });
           history.push("/cart/");
+          setIsLoading(false);
         })
         .catch(() => {
           toast.error("Token expirado. Efetue login novamente", {
             autoClose: 3000,
           });
+          setIsLoading(false);
         });
     } else {
       toast.info("Efetue login para finalizar a montagem");
       history.push("/sign");
+      setIsLoading(false);
     }
   };
 
@@ -297,6 +302,8 @@ export const BuildProvider = ({ children }) => {
         buildCheckout,
         checkErrors,
         buildProducts,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}
