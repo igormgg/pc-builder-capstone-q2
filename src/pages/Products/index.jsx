@@ -134,7 +134,12 @@ const Products = () => {
                         <p onClick={() => handleOpenModal(element)}>
                           Exibir detalhes <AiOutlinePlusCircle id="plusIcon" />
                         </p>
-                        <h3>Preço: R$ {element.price.toFixed(2)}</h3>
+                        <h3>
+                          {element.price.toLocaleString("pt-BR", {
+                            style: "currency",
+                            currency: "BRL",
+                          })}
+                        </h3>
                       </div>
                       <button
                         onClick={() => {
@@ -158,7 +163,12 @@ const Products = () => {
                         <p onClick={() => handleOpenModal(element)}>
                           Exibir detalhes <AiOutlinePlusCircle id="plusIcon" />
                         </p>
-                        <h3>Preço: R$ {element.price.toFixed(2)}</h3>
+                        <h3>
+                          {element.price.toLocaleString("pt-BR", {
+                            style: "currency",
+                            currency: "BRL",
+                          })}
+                        </h3>
                       </div>
                       <button
                         onClick={() => {
@@ -188,7 +198,12 @@ const Products = () => {
                     <p onClick={() => handleOpenModal(element)}>
                       Exibir detalhes <AiOutlinePlusCircle id="plusIcon" />
                     </p>
-                    <h3>Preço: R$ {element.price.toFixed(2)}</h3>
+                    <h3>
+                      {element.price.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </h3>
                   </div>
                   <button
                     onClick={() => {
@@ -212,7 +227,12 @@ const Products = () => {
                     <p onClick={() => handleOpenModal(element)}>
                       Exibir detalhes <AiOutlinePlusCircle id="plusIcon" />
                     </p>
-                    <h3>Preço: R$ {element.price.toFixed(2)}</h3>
+                    <h3>
+                      {element.price.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </h3>
                   </div>
                   <button
                     onClick={() => {
