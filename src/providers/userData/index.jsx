@@ -29,7 +29,7 @@ const UserProvider = ({ children }) => {
       setEnvironment();
       getCartItems();
     }
-  }, [token, checkoutAuth, setCheckoutAuth, cart]);
+  }, [token, checkoutAuth, setCheckoutAuth]);
 
   const getCartItems = () => {
     api

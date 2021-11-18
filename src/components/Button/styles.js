@@ -55,7 +55,7 @@ export const StyledButton = styled.button`
       background: "transparent",
       border: "3px solid #ff4554",
       borderStyle: "solid solid dotted dotted",
-      animation: "rotate 1s infinite linear",
+      animation: "rotate 1s infinite linear running",
       borderColor: "#ff4554 #ff4554 transparent #ff4554",
     }}
 `;
