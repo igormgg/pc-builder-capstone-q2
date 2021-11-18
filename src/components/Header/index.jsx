@@ -1,8 +1,11 @@
 import Logo from "../../assets/images/logo.png";
 import { FaShoppingCart } from "react-icons/fa";
 import { HeaderContainer } from "./styles";
+import { IoMdContacts } from "react-icons/io";
 import { useHistory } from "react-router";
 import { useAuth } from "../../providers/auth";
+import ModalContacts from "../ModalContacts";
+import { useModal } from "../../providers/modal";
 
 const Header = ({
   buttonOut1,
@@ -14,6 +17,8 @@ const Header = ({
   const history = useHistory();
 
   const { signOut, token } = useAuth();
+
+  const { contactsOpen, setContactsOpen } = useModal();
 
   const handleClick1 = () => {
     if (token) {
@@ -104,25 +109,30 @@ const Header = ({
   };
 
   return (
-    <HeaderContainer>
-      <div id="LogoDiv" onClick={() => history.push("/")}>
-        <img src={Logo} alt="Logo" />
-        <h1>PC Builder</h1>
-      </div>
-      <div id="headerEnd">
-        <div id="buttonsDiv">
-          <button id="button1" onClick={handleClick1}>
-            {token ? buttonIn1 : buttonOut1}
-          </button>
-          <button id="button2" onClick={handleClick2}>
-            {token ? buttonIn2 : buttonOut2}
-          </button>
+    <>
+      {contactsOpen && <ModalContacts />}
+      <HeaderContainer>
+        <div id="LogoDiv" onClick={() => history.push("/")}>
+          <img src={Logo} alt="Logo" />
+          <h1>PC Builder</h1>
         </div>
-        {token && cart && (
-          <FaShoppingCart onClick={() => history.push("/cart")} />
-        )}
-      </div>
-    </HeaderContainer>
+        <div id="headerEnd">
+          <div id="buttonsDiv">
+            <button id="button1" onClick={handleClick1}>
+              {token ? buttonIn1 : buttonOut1}
+            </button>
+            <button id="button2" onClick={handleClick2}>
+              {token ? buttonIn2 : buttonOut2}
+            </button>
+          </div>
+          {token ? (
+            cart && <FaShoppingCart onClick={() => history.push("/cart")} />
+          ) : (
+            <IoMdContacts onClick={() => setContactsOpen(true)} />
+          )}
+        </div>
+      </HeaderContainer>
+    </>
   );
 };
 
