@@ -86,7 +86,7 @@ const Cart = () => {
         </div>
         {cart.length === 0 ? (
           <>
-            <h1>Não há produtos no carrinho</h1>
+            <h1 id='noProductsTitle'>Não há produtos no carrinho</h1>
             <button id="backToShopping" onClick={() => history.push("/")}>
               Voltar às compras
             </button>
