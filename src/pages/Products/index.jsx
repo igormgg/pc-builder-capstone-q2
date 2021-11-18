@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { useHistory } from "react-router";
 import { Container } from "./styles";
 import api from "../../services/api.js";
 import { AiOutlinePlusCircle } from "react-icons/ai";
@@ -62,12 +62,14 @@ const Products = () => {
     const userId = localStorage.getItem("userID");
 
     if (token) {
-      api.post(
-        "/cart/",
-        { ...item, userId: userId },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      toast.success(`${item.model} foi adicionado ao carrinho!`);
+      api
+        .post(
+          "/cart/",
+          { ...item, userId: userId },
+          { headers: { Authorization: `Bearer ${token}` } }
+        )
+        .then(() => toast.success(`${item.model} foi adicionado ao carrinho!`))
+        .catch(() => toast.error("Ops, algo deu errado!"));
     } else {
       toast.info("Efetue login para adicionar produtos no carrinho!");
       history.push("/sign");
