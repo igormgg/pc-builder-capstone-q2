@@ -18,7 +18,6 @@ export const BuildProvider = ({ children }) => {
     font: [],
     peripherals: [],
   });
-
   const [buildTotal, setBuildTotal] = useState(0);
   const [buildWatts, setBuildWatts] = useState(0);
   const [buildProducts, setBuildProducts] = useState([]);
