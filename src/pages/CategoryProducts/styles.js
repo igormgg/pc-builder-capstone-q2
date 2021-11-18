@@ -41,6 +41,12 @@ h3 {
 #products {
     margin: 20px auto;
     border-top: 2px solid var(--gray2);
+    > :nth-child(even){
+            animation: card_anim .6s 1 ease-in-out;
+        }
+    > :nth-child(odd){
+        animation: card_anim .5s 1 ease-in-out;
+    }
     
     #card {
         border: 2px solid var(--gray3);
@@ -136,6 +142,7 @@ h3 {
         height: 250px;
         display: grid;
         place-items: center;
+        animation: showUp 0.6s 1 ease-in-out 0.5s both;;
     }
 }
 
@@ -183,6 +190,23 @@ h3 {
                 }
             }
         }
+    }
+}
+
+@keyframes card_anim {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes showUp {
+    from {
+      opacity: 0;
     }
 }
 
