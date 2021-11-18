@@ -8,6 +8,19 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         outline: none;
         font-family: 'Oswald', sans-serif;
+        ::-webkit-scrollbar {
+            width: 7px;               
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray3);
+            border-radius: 20px;    
+        }
+
+        ::-webkit-scrollbar-thumb {
+        background-color: var(--secondary-color);   
+        border-radius: 20px;
+        }
     }
 
     html, body, div, span, applet, object, iframe, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
