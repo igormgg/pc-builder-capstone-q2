@@ -5,6 +5,12 @@ export const StyledButton = styled.button`
   border-radius: 8px;
   font-size: 16px;
 
+  @keyframes rotate {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   ${(props) =>
     props.variant === "outlined"
       ? `${css} color: var(--gray1);
@@ -38,5 +44,18 @@ export const StyledButton = styled.button`
     props.disabled && {
       pointerEvents: "none",
       background: "var(--gray2)",
+    }}
+
+  ${(props) =>
+    props.loading && {
+      width: "60px",
+      height: "60px",
+      borderRadius: "50%",
+      fontSize: "0",
+      background: "transparent",
+      border: "3px solid #ff4554",
+      borderStyle: "solid solid dotted dotted",
+      animation: "rotate 1s infinite linear",
+      borderColor: "#ff4554 #ff4554 transparent #ff4554",
     }}
 `;

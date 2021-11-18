@@ -11,10 +11,10 @@ import {
 } from "./styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { BsCheckLg } from "react-icons/bs";
 import { useEffect } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export const Checkout = () => {
   const history = useHistory();
@@ -36,6 +36,8 @@ export const Checkout = () => {
     clearCart,
     endCheckout,
     setEndCheckout,
+    isLoading,
+    setIsLoading,
   } = useUserData();
 
   const [validateCardButton, setValidateCardButton] = useState(false);
@@ -126,7 +128,7 @@ export const Checkout = () => {
         )}
         {!endCheckout && (
           <>
-            <ChildContainer>
+            <ChildContainer className="left_content">
               <div className="section_header">
                 <h3>{userInfo.name}</h3>
                 <h4>{userInfo.email}</h4>
@@ -224,7 +226,7 @@ export const Checkout = () => {
                 )}
               </div>
             </ChildContainer>
-            <ChildContainer>
+            <ChildContainer className="right_content">
               <div className="section_header flex_end">
                 <h3>Informações de Pagamento</h3>
               </div>
@@ -310,6 +312,7 @@ export const Checkout = () => {
                 )
               }
               onClick={clearCart}
+              loading={isLoading}
             >
               Finalizar pedido
             </Button>

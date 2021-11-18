@@ -109,6 +109,28 @@ export const ChildContainer = styled.div`
   max-width: 450px;
   min-width: 240px;
 
+  @keyframes first_child_anim {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+  }
+
+  @keyframes last_child_anim {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+  }
+
+  &.left_content {
+    animation: first_child_anim 1 0.5s ease;
+  }
+
+  &.right_content {
+    animation: last_child_anim 1 0.5s ease;
+  }
+
   .flex_end {
     /* text-align: right; */
   }

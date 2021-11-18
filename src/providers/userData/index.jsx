@@ -22,13 +22,14 @@ const UserProvider = ({ children }) => {
   const [cepError, setCepError] = useState(false);
   const [cart, setCart] = useState([]);
   const [endCheckout, setEndCheckout] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (token) {
       setEnvironment();
       getCartItems();
     }
-  }, [token, checkoutAuth, setCheckoutAuth]);
+  }, [token, checkoutAuth, setCheckoutAuth, cart]);
 
   const getCartItems = () => {
     api
@@ -161,15 +162,20 @@ const UserProvider = ({ children }) => {
       .catch((err) => "Erro ao remover cartão");
   };
 
-  const clearCart = () => {
-    cart.forEach((item) => {
-      api.delete(`/cart/${item.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  const clearCart = async () => {
+    setIsLoading(true);
+    await Promise.all(
+      cart.map(async (item) => {
+        await api.delete(`/cart/${item.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      })
+    ).then(() => {
+      setEndCheckout(true);
+      setIsLoading(false);
     });
-    setEndCheckout(true);
   };
 
   return (
@@ -191,6 +197,8 @@ const UserProvider = ({ children }) => {
         cart,
         endCheckout,
         setEndCheckout,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}
