@@ -19,11 +19,12 @@ import { useEffect } from "react";
 export const Checkout = () => {
   const history = useHistory();
 
-  const { checkoutAuth } = useAuth();
+  const { checkoutAuth, setCheckoutAuth } = useAuth();
 
   const {
     userAddress,
     userCardInfo,
+    userInfo,
     cepResults,
     getAddress,
     cepError,
@@ -32,8 +33,9 @@ export const Checkout = () => {
     removeAddress,
     addCard,
     removeCard,
-    cart,
     clearCart,
+    endCheckout,
+    setEndCheckout,
   } = useUserData();
 
   const [validateCardButton, setValidateCardButton] = useState(false);
@@ -52,7 +54,7 @@ export const Checkout = () => {
       .required("Campo obrigatório")
       .matches(
         /^(\d{4})(\d{4})(\d{4})(\d{4})$/,
-        "Padrão inválido. Ex: 444455556666777"
+        "Padrão inválido. Ex: 4444555566667777"
       ),
 
     sn: yup
@@ -81,10 +83,15 @@ export const Checkout = () => {
   };
 
   useEffect(() => {
-    if (!cart.length || !checkoutAuth) {
-      history.push("/cart");
-    }
+    return () => {
+      setEndCheckout(false);
+      setCheckoutAuth(false);
+    };
   }, []);
+
+  if (!checkoutAuth) {
+    history.push("/cart");
+  }
 
   return (
     <>
@@ -95,7 +102,7 @@ export const Checkout = () => {
         buttonOut2="Produtos"
       ></Header>
       <Container>
-        {!cart.length && (
+        {endCheckout && (
           <CheckoutConfirmation>
             <div className="confirmation_container">
               <div className="icon_content">
@@ -103,6 +110,9 @@ export const Checkout = () => {
               </div>
               <div className="confirmation_content">
                 <h3>Pedido finalizado com sucesso!</h3>
+                <span>
+                  Informações do pedido serão enviadas para: {userInfo.email}
+                </span>
               </div>
               <Button
                 size="md"
@@ -114,17 +124,16 @@ export const Checkout = () => {
             </div>
           </CheckoutConfirmation>
         )}
-        {cart.length > 0 && (
+        {!endCheckout && (
           <>
             <ChildContainer>
               <div className="section_header">
-                <h3>Kenzinho</h3>
-                <h4>kenzinho@mail.com</h4>
+                <h3>{userInfo.name}</h3>
+                <h4>{userInfo.email}</h4>
               </div>
               <div className="section_body">
                 <h3>Endereço de entrega</h3>
-
-                {Object.values(userAddress).length > 0 ? (
+                {Object.values(userAddress).length > 0 && checkoutAuth && (
                   <div className="address_info">
                     <div className="info_content">
                       <h3>
@@ -151,7 +160,8 @@ export const Checkout = () => {
                       Remover
                     </Button>
                   </div>
-                ) : (
+                )}
+                {!Object.values(userAddress).length && checkoutAuth && (
                   <form action="">
                     <div>
                       <input
@@ -289,7 +299,7 @@ export const Checkout = () => {
             </ChildContainer>
           </>
         )}
-        {cart.length > 0 && (
+        {!endCheckout && (
           <CheckoutContainer>
             <Button
               size="lg"

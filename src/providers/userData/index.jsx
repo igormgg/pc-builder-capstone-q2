@@ -11,7 +11,7 @@ const UserProvider = ({ children }) => {
   const [userCardInfo, setUserCardInfo] = useState({});
   const [userInfo, setUserInfo] = useState({});
   const [userId, setUserId] = useState(localStorage.getItem("userID") || "");
-  const { token } = useAuth();
+  const { token, checkoutAuth, setCheckoutAuth } = useAuth();
   const [cepResults, setCepResults] = useState({
     cep: "",
     cidade: "",
@@ -21,13 +21,14 @@ const UserProvider = ({ children }) => {
   });
   const [cepError, setCepError] = useState(false);
   const [cart, setCart] = useState([]);
+  const [endCheckout, setEndCheckout] = useState(false);
 
   useEffect(() => {
     if (token) {
       setEnvironment();
       getCartItems();
     }
-  }, [token, cart]);
+  }, [token, checkoutAuth, setCheckoutAuth]);
 
   const getCartItems = () => {
     api
@@ -162,16 +163,13 @@ const UserProvider = ({ children }) => {
 
   const clearCart = () => {
     cart.forEach((item) => {
-      api
-        .delete(`/cart/${item.id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          setCart([]);
-        });
+      api.delete(`/cart/${item.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     });
+    setEndCheckout(true);
   };
 
   return (
@@ -191,6 +189,8 @@ const UserProvider = ({ children }) => {
         removeCard,
         clearCart,
         cart,
+        endCheckout,
+        setEndCheckout,
       }}
     >
       {children}
