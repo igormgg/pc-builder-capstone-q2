@@ -111,7 +111,7 @@ export const Checkout = () => {
               <div className="confirmation_content">
                 <h3>Pedido finalizado com sucesso!</h3>
                 <span>
-                  Informações do pedido serão enviadas para: {userInfo.email}
+                  Informações do pedido enviadas para: {userInfo.email}
                 </span>
               </div>
               <Button

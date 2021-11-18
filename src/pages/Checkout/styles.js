@@ -78,6 +78,11 @@ export const CheckoutConfirmation = styled.div`
   }
 
   .confirmation_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
     h3 {
       font-size: calc(16px + 10 * ((100vw - 320px) / 680));
       text-align: center;
