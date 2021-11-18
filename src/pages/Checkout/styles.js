@@ -78,6 +78,11 @@ export const CheckoutConfirmation = styled.div`
   }
 
   .confirmation_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
     h3 {
       font-size: calc(16px + 10 * ((100vw - 320px) / 680));
       text-align: center;
@@ -103,6 +108,28 @@ export const ChildContainer = styled.div`
   width: 100%;
   max-width: 450px;
   min-width: 240px;
+
+  @keyframes first_child_anim {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+  }
+
+  @keyframes last_child_anim {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+  }
+
+  &.left_content {
+    animation: first_child_anim 1 0.5s ease;
+  }
+
+  &.right_content {
+    animation: last_child_anim 1 0.5s ease;
+  }
 
   .flex_end {
     /* text-align: right; */

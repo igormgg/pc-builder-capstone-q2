@@ -5,10 +5,17 @@ export const Button = ({
   variant,
   size,
   disabled = false,
+  isLoading = false,
   ...rest
 }) => {
   return (
-    <StyledButton variant={variant} disabled={disabled} size={size} {...rest}>
+    <StyledButton
+      variant={variant}
+      disabled={disabled}
+      isLoading={isLoading}
+      size={size}
+      {...rest}
+    >
       {children}
     </StyledButton>
   );

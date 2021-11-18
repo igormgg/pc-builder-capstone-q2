@@ -5,6 +5,12 @@ export const StyledButton = styled.button`
   border-radius: 8px;
   font-size: 16px;
 
+  @keyframes rotate {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   ${(props) =>
     props.variant === "outlined"
       ? `${css} color: var(--gray1);
@@ -32,11 +38,38 @@ export const StyledButton = styled.button`
       background-image: linear-gradient(var(--gray4), var(--gray4)), radial-gradient(circle at top left, #FF55BB, #FF4343);
       background-origin: border-box;
       background-clip: content-box, border-box;`}
+
+    ${(props) =>
+      props.isLoading && {
+        width: "60px",
+        height: "60px",
+        borderRadius: "50%",
+        fontSize: "0",
+        background: "transparent",
+        border: "3px solid #ff4554",
+        borderStyle: "solid solid dotted dotted",
+        animation: "rotate 1s infinite linear running",
+        borderColor: "#ff4554 #ff4554 transparent #ff4554",
+      }}
   }
 
   ${(props) =>
     props.disabled && {
       pointerEvents: "none",
       background: "var(--gray2)",
+    }}
+
+  ${(props) =>
+    props.isLoading && {
+      width: "60px",
+      height: "60px",
+      borderRadius: "50%",
+      fontSize: "0",
+      background: "transparent",
+      border: "3px solid #ff4554",
+      borderStyle: "solid solid dotted dotted",
+      animation: "rotate 1s infinite linear running",
+      borderColor: "#ff4554 #ff4554 transparent #ff4554",
+      pointerEvents: "none",
     }}
 `;

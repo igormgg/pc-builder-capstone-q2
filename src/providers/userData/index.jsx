@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import api from "../../services/api";
 import cep from "../../services/cep";
 import { useAuth } from "../auth";
+import { useCart } from "../../providers/cart";
 
 const userContext = createContext({});
 
@@ -11,7 +12,7 @@ const UserProvider = ({ children }) => {
   const [userCardInfo, setUserCardInfo] = useState({});
   const [userInfo, setUserInfo] = useState({});
   const [userId, setUserId] = useState(localStorage.getItem("userID") || "");
-  const { token } = useAuth();
+  const { token, checkoutAuth, setCheckoutAuth } = useAuth();
   const [cepResults, setCepResults] = useState({
     cep: "",
     cidade: "",
@@ -20,27 +21,15 @@ const UserProvider = ({ children }) => {
     numero: "",
   });
   const [cepError, setCepError] = useState(false);
-  const [cart, setCart] = useState([]);
+  const { cart, setCart } = useCart();
+  const [endCheckout, setEndCheckout] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (token) {
       setEnvironment();
-      getCartItems();
     }
-  }, [token, cart]);
-
-  const getCartItems = () => {
-    api
-      .get(`/cart?userId=${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        setCart(response.data);
-      })
-      .catch((err) => console.log(err));
-  };
+  }, [token, checkoutAuth, setCheckoutAuth, cart]);
 
   const setEnvironment = () => {
     setUserId(localStorage.getItem("userID"));
@@ -160,17 +149,20 @@ const UserProvider = ({ children }) => {
       .catch((err) => "Erro ao remover cartão");
   };
 
-  const clearCart = () => {
-    cart.forEach((item) => {
-      api
-        .delete(`/cart/${item.id}`, {
+  const clearCart = async () => {
+    setIsLoading(true);
+    await Promise.all(
+      cart.map(async (item) => {
+        await api.delete(`/cart/${item.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        })
-        .then((res) => {
-          setCart([]);
         });
+      })
+    ).then(() => {
+      setEndCheckout(true);
+      setIsLoading(false);
+      setCart([]);
     });
   };
 
@@ -191,6 +183,10 @@ const UserProvider = ({ children }) => {
         removeCard,
         clearCart,
         cart,
+        endCheckout,
+        setEndCheckout,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}
