@@ -110,7 +110,8 @@ const GlobalStyle = createGlobalStyle`
         height: 100%;
         padding: 0 16px;
         background-color: var(--gray4);
-        overflow-y: ${(props) => (props.isOpen ? "hidden" : "unset")};
+        overflow-y: ${(props) =>
+          props.isOpen || props.contactsOpen ? "hidden" : "unset"};
     }
 
     button {

@@ -3,11 +3,11 @@ import Routes from "./routes";
 import { useModal } from "./providers/modal";
 
 function App() {
-  const { isOpen } = useModal();
+  const { isOpen, contactsOpen } = useModal();
 
   return (
     <>
-      <GlobalStyle isOpen={isOpen} />
+      <GlobalStyle isOpen={isOpen} contactsOpen={contactsOpen} />
       <div className="App">
         <Routes />
       </div>
